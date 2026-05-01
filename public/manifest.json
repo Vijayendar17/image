@@ -1,0 +1,51 @@
+{
+  "name": "DocTools India",
+  "short_name": "DocTools",
+  "description": "Free image & PDF tools for Indian government form uploads. Works offline.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#ff6b35",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en-IN",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Compress Image to 50KB",
+      "short_name": "Compress",
+      "description": "Compress images for govt form uploads",
+      "url": "/compress-image-to-50kb",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Passport Photo Resize",
+      "short_name": "Passport",
+      "description": "Resize passport photo for VISA & PAN",
+      "url": "/passport-photo-resize",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "SSC/UPSC Document Resize",
+      "short_name": "Exam Docs",
+      "description": "Resize photo & signature for exam portals",
+      "url": "/ssc-document-resize",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "categories": ["utilities", "productivity"],
+  "prefer_related_applications": false
+}
