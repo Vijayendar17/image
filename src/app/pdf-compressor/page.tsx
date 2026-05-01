@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import PdfCompressorClient from "./PdfCompressorClient";
+import { WebAppSchema, FAQSchema, BreadcrumbSchema } from "../components/SchemaMarkup";
 
 export const metadata: Metadata = {
   title: "Aadhaar PDF Compressor Free – Compress PDF Under 200KB, 1MB for Upload",
@@ -18,8 +19,26 @@ export const metadata: Metadata = {
 };
 
 export default function PdfCompressorPage() {
+  const faqs = [
+    { q: "Why do portals reject large PDF files?", a: "Indian government job portals typically limit document uploads to 200KB–2MB. Aadhaar PDFs from DigiLocker are often 1–3MB and need compression before uploading." },
+    { q: "Can I compress an Aadhaar-protected PDF?", a: "If your Aadhaar PDF is password-protected, enter your 8-digit birth year + PIN from UIDAI to unlock it, then upload here." },
+    { q: "Will the text remain readable after compression?", a: "Yes! We use smart compression that maintains readability while reducing file size. All text, names, and IDs remain perfectly legible." },
+    { q: "Is my Aadhaar data safe?", a: "Absolutely. Your PDF is processed entirely in your browser. It never leaves your device. We have zero access to your Aadhaar number or personal information." },
+  ];
+
   return (
     <>
+      <WebAppSchema
+        name="Aadhaar PDF Compressor – Free Online"
+        description="Compress Aadhaar card PDF, marksheets, and certificates below 200KB or 1MB for online portal uploads. Free PDF size reducer for SSC, UPSC, bank applications."
+        url="https://doctools.india/pdf-compressor"
+        keywords={["aadhaar pdf compressor", "compress pdf under 200kb free", "reduce pdf size india", "pdf compressor for government upload"]}
+      />
+      <FAQSchema faqs={faqs} />
+      <BreadcrumbSchema items={[
+        { name: "Home", url: "https://doctools.india" },
+        { name: "PDF Compressor", url: "https://doctools.india/pdf-compressor" },
+      ]} />
       <Navbar />
       <main className="tool-page">
         <div className="tool-hero">

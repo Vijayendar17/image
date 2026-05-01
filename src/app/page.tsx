@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import { WebsiteSchema } from "./components/SchemaMarkup";
 
 export const metadata: Metadata = {
   title: "DocTools India – Free Image & PDF Tools for Govt Forms | No Signup",
@@ -76,6 +77,7 @@ const stats = [
 export default function HomePage() {
   return (
     <>
+      <WebsiteSchema />
       <Navbar />
       <main>
         {/* Hero */}

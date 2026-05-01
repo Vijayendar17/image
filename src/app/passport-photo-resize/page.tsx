@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import PassportPhotoClient from "./PassportPhotoClient";
+import { WebAppSchema, FAQSchema, BreadcrumbSchema } from "../components/SchemaMarkup";
 
 export const metadata: Metadata = {
   title: "Passport Photo Resize Online Free – 35x45mm, 50KB for VISA & Govt Forms",
@@ -18,8 +19,26 @@ export const metadata: Metadata = {
 };
 
 export default function PassportPhotoPage() {
+  const faqs = [
+    { q: "What size is a standard Indian passport photo?", a: "Indian passport photos must be 35mm × 45mm (3.5cm × 4.5cm). The face should occupy 70-80% of the frame with a plain white background." },
+    { q: "What file size is required for Indian VISA applications?", a: "Most Indian VISA and passport portals require the photo to be between 10KB and 50KB in JPG format. Some portals like NRI OCI require files under 300KB." },
+    { q: "What size photo is needed for PAN card application?", a: "NSDL requires passport-sized photos. The uploaded file must be a JPG under 50KB with dimensions approximately 213×213 pixels." },
+    { q: "Can I use this for UPSC Mains photo upload?", a: "Yes! UPSC's DAF form requires a recent passport photograph in JPG format with a maximum size of 300KB. Our tool handles all these size requirements." },
+  ];
+
   return (
     <>
+      <WebAppSchema
+        name="Passport Photo Resize Online Free"
+        description="Resize passport photo to 35x45mm or any standard size. Compress under 50KB for Indian VISA, PAN, Aadhaar, bank exam applications. Free, no signup."
+        url="https://doctools.india/passport-photo-resize"
+        keywords={["passport photo resize india", "resize photo for pan card", "photo size for indian visa", "passport photo 50kb online"]}
+      />
+      <FAQSchema faqs={faqs} />
+      <BreadcrumbSchema items={[
+        { name: "Home", url: "https://doctools.india" },
+        { name: "Passport Photo Resize", url: "https://doctools.india/passport-photo-resize" },
+      ]} />
       <Navbar />
       <main className="tool-page">
         <div className="tool-hero">

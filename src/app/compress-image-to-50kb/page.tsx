@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import CompressImageClient from "./CompressImageClient";
 import AdSlot from "../components/AdSlot";
+import { WebAppSchema, FAQSchema, BreadcrumbSchema } from "../components/SchemaMarkup";
 
 export const metadata: Metadata = {
   title: "Compress Image to 50KB Online Free – JPG PNG for Govt Form Upload",
@@ -19,8 +20,42 @@ export const metadata: Metadata = {
 };
 
 export default function CompressImagePage() {
+  const faqs = [
+    {
+      q: "Why do government portals reject images larger than 50KB?",
+      a: "Most Indian government exam portals (SSC, UPSC, IBPS, RRB, etc.) have strict file size limits because they process millions of applications. Keeping files small ensures faster uploads and reduces server storage costs.",
+    },
+    {
+      q: "Will my image quality be ruined after compression?",
+      a: "Our tool uses smart quality optimization — it reduces file size while maintaining acceptable visual quality. For passport-style photos and form uploads, the quality is always sufficient.",
+    },
+    {
+      q: "Is my image uploaded to any server?",
+      a: "No. Compression happens entirely in your browser using JavaScript. Your file never leaves your device. We have no servers receiving your images.",
+    },
+    {
+      q: "Which formats are supported?",
+      a: "We support JPG (JPEG) and PNG. For government forms, JPG is generally preferred as it compresses smaller than PNG.",
+    },
+    {
+      q: "What if the compressed image is still too large?",
+      a: "Lower the quality further using the custom KB input. The tool shows you real-time file size so you can hit your exact target.",
+    },
+  ];
+
   return (
     <>
+      <WebAppSchema
+        name="Compress Image to 50KB – Free Online Tool"
+        description="Compress JPG or PNG images to 50KB, 100KB or any size for SSC, UPSC, IBPS government form uploads. Free, no signup, works in browser."
+        url="https://doctools.india/compress-image-to-50kb"
+        keywords={["compress image to 50kb", "image compress for government upload", "jpg compress india", "reduce image size ssc upsc"]}
+      />
+      <FAQSchema faqs={faqs} />
+      <BreadcrumbSchema items={[
+        { name: "Home", url: "https://doctools.india" },
+        { name: "Compress Image to 50KB", url: "https://doctools.india/compress-image-to-50kb" },
+      ]} />
       <Navbar />
       <main className="tool-page">
         <div className="tool-hero">
