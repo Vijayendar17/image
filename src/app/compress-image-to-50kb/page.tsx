@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import CompressImageClient from "./CompressImageClient";
 import AdSlot from "../components/AdSlot";
 import { WebAppSchema, FAQSchema, BreadcrumbSchema } from "../components/SchemaMarkup";
+import { siteConfig } from "../config";
 
 export const metadata: Metadata = {
   title: "Compress Image to 50KB Online Free – JPG PNG for Govt Form Upload",
@@ -17,6 +18,21 @@ export const metadata: Metadata = {
     "reduce image size for ssc form",
     "whatsapp image compressor india",
   ],
+  alternates: {
+    canonical: `${siteConfig.baseUrl}/compress-image-to-50kb`,
+  },
+  openGraph: {
+    title: "Compress Image to 50KB Online Free – JPG PNG for Govt Form Upload",
+    description:
+      "Compress JPG or PNG to 50KB, 100KB for SSC, UPSC, IBPS government form uploads. Free, instant, no signup.",
+    url: `${siteConfig.baseUrl}/compress-image-to-50kb`,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Compress Image to 50KB Free – ${siteConfig.name}`,
+    description: "Compress JPG/PNG to 50KB for government exam uploads. Instant, private, no signup.",
+  },
 };
 
 export default function CompressImagePage() {
@@ -48,13 +64,13 @@ export default function CompressImagePage() {
       <WebAppSchema
         name="Compress Image to 50KB – Free Online Tool"
         description="Compress JPG or PNG images to 50KB, 100KB or any size for SSC, UPSC, IBPS government form uploads. Free, no signup, works in browser."
-        url="https://doctools.india/compress-image-to-50kb"
+        url="https://litefiles.vercel.app/compress-image-to-50kb"
         keywords={["compress image to 50kb", "image compress for government upload", "jpg compress india", "reduce image size ssc upsc"]}
       />
       <FAQSchema faqs={faqs} />
       <BreadcrumbSchema items={[
-        { name: "Home", url: "https://doctools.india" },
-        { name: "Compress Image to 50KB", url: "https://doctools.india/compress-image-to-50kb" },
+        { name: "Home", url: "https://litefiles.vercel.app" },
+        { name: "Compress Image to 50KB", url: "https://litefiles.vercel.app/compress-image-to-50kb" },
       ]} />
       <Navbar />
       <main className="tool-page">

@@ -1,4 +1,6 @@
-// Reusable JSON-LD structured data components for SEO
+import { siteConfig } from "../config";
+const SITE_URL = siteConfig.baseUrl;
+const SITE_NAME = siteConfig.name;
 
 interface WebAppSchemaProps {
   name: string;
@@ -27,8 +29,8 @@ export function WebAppSchema({ name, description, url, keywords }: WebAppSchemaP
     "keywords": keywords?.join(", "),
     "provider": {
       "@type": "Organization",
-      "name": "DocTools India",
-      "url": "https://doctools.india"
+      "name": SITE_NAME,
+      "url": SITE_URL
     }
   };
 
@@ -92,18 +94,10 @@ export function WebsiteSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "DocTools India",
-    "url": "https://doctools.india",
+    "name": SITE_NAME,
+    "url": SITE_URL,
     "description": "Free image and PDF tools for Indian government form uploads. Compress images, resize passport photos, and prepare documents for SSC, UPSC, and other exam portals.",
     "inLanguage": "en-IN",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": "https://doctools.india/?q={search_term_string}"
-      },
-      "query-input": "required name=search_term_string"
-    }
   };
 
   return (

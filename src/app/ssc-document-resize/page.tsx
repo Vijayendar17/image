@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import SscDocClient from "./SscDocClient";
+import { WebAppSchema, FAQSchema, BreadcrumbSchema } from "../components/SchemaMarkup";
+import { siteConfig } from "../config";
 
 export const metadata: Metadata = {
   title: "SSC UPSC IBPS Document Resize Free – Photo & Signature for Exam Portals",
@@ -15,11 +17,56 @@ export const metadata: Metadata = {
     "competitive exam photo resize india",
     "sbi po photo signature size",
   ],
+  alternates: {
+    canonical: `${siteConfig.baseUrl}/ssc-document-resize`,
+  },
+  openGraph: {
+    title: "SSC UPSC IBPS Document Resize Free – Exam-Ready Photo & Signature",
+    description:
+      "One-click resize photo & signature to exact SSC, UPSC, IBPS, SBI, RRB specs. Free, instant, no signup.",
+    url: `${siteConfig.baseUrl}/ssc-document-resize`,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `SSC/UPSC Document Resize – ${siteConfig.name}`,
+    description: "Resize photo & signature to exact exam portal specs. SSC, UPSC, IBPS, SBI. Free, instant.",
+  },
 };
+
+const faqs = [
+  {
+    q: "What are SSC CGL photo and signature requirements?",
+    a: "SSC CGL requires a photo of 100×120 pixels in JPG format (maximum 50KB) and a signature of 140×60 pixels in JPG format (maximum 12KB, minimum 1KB).",
+  },
+  {
+    q: "What photo size does UPSC require for CSE application?",
+    a: "UPSC Civil Services requires a recent passport-size photograph in JPEG format, 200×230 pixels, under 300KB. The signature should be 140×60 pixels and under 40KB.",
+  },
+  {
+    q: "What are IBPS PO signature specifications?",
+    a: "IBPS requires a JPG signature image of 140×60 pixels with a file size between 10KB and 20KB. The photo should be 200×230 pixels, under 50KB.",
+  },
+  {
+    q: "Can I use this for SBI PO / Clerk applications?",
+    a: "Yes! SBI PO and Clerk require a 200×200 pixel photo (under 50KB) and a 140×60 pixel signature (under 20KB). Our SSC/UPSC preset handles SBI specs with one click.",
+  },
+];
 
 export default function SscDocPage() {
   return (
     <>
+      <WebAppSchema
+        name="SSC UPSC IBPS Document Resize – Free Online"
+        description="Resize photo and signature to exact SSC CGL, UPSC, IBPS, SBI, RRB specifications in one click. Free, instant competitive exam document tool."
+        url="https://litefiles.vercel.app/ssc-document-resize"
+        keywords={["ssc document resize", "upsc photo size", "ibps signature resize", "competitive exam photo india"]}
+      />
+      <FAQSchema faqs={faqs} />
+      <BreadcrumbSchema items={[
+        { name: "Home", url: "https://litefiles.vercel.app" },
+        { name: "SSC / UPSC Document Resize", url: "https://litefiles.vercel.app/ssc-document-resize" },
+      ]} />
       <Navbar />
       <main className="tool-page">
         <div className="tool-hero">
@@ -36,7 +83,7 @@ export default function SscDocPage() {
         <SscDocClient />
 
         <div className="faq-section">
-          <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "1.5rem", marginBottom: "1.5rem" }}>
+          <h2 style={{ fontFamily: "var(--font-plus-jakarta-sans), sans-serif", fontWeight: 800, fontSize: "1.5rem", marginBottom: "1.5rem" }}>
             Exam-wise Photo Specifications
           </h2>
           <div style={{ overflowX: "auto" }}>
@@ -65,6 +112,15 @@ export default function SscDocPage() {
                 ))}
               </tbody>
             </table>
+          </div>
+
+          <div style={{ marginTop: "2rem" }}>
+            {faqs.map((faq) => (
+              <div key={faq.q} className="faq-item">
+                <p className="faq-question">{faq.q}</p>
+                <p className="faq-answer">{faq.a}</p>
+              </div>
+            ))}
           </div>
         </div>
       </main>

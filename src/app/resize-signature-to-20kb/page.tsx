@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import SignatureClient from "./SignatureClient";
 import { WebAppSchema, FAQSchema, BreadcrumbSchema } from "../components/SchemaMarkup";
+import { siteConfig } from "../config";
 
 export const metadata: Metadata = {
   title: "Resize Signature to 20KB Online Free – For SSC, UPSC, IBPS, Bank Exams",
@@ -17,6 +18,21 @@ export const metadata: Metadata = {
     "ibps signature resize 20kb",
     "signature jpg 10kb online",
   ],
+  alternates: {
+    canonical: `${siteConfig.baseUrl}/resize-signature-to-20kb`,
+  },
+  openGraph: {
+    title: "Resize Signature to 20KB Free – SSC, UPSC, IBPS, Bank Exams",
+    description:
+      "Compress signature image to 20KB for SSC CGL, UPSC, IBPS PO, SBI Clerk exam portals. Instant, free, no signup.",
+    url: `${siteConfig.baseUrl}/resize-signature-to-20kb`,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Signature to 20KB Free – ${siteConfig.name}`,
+    description: "Resize signature to exact SSC, UPSC, IBPS specs. Under 20KB, instant, free.",
+  },
 };
 
 export default function SignaturePage() {
@@ -32,13 +48,13 @@ export default function SignaturePage() {
       <WebAppSchema
         name="Resize Signature to 20KB – For SSC, UPSC, IBPS, Bank Exams"
         description="Compress and resize your signature image to under 20KB for SSC CGL, UPSC, IBPS PO, SBI Clerk, and all competitive exam portals. Free, instant."
-        url="https://doctools.india/resize-signature-to-20kb"
+        url="https://litefiles.vercel.app/resize-signature-to-20kb"
         keywords={["resize signature to 20kb", "signature compress for ssc", "upsc signature size", "ibps signature resize 20kb"]}
       />
       <FAQSchema faqs={faqs} />
       <BreadcrumbSchema items={[
-        { name: "Home", url: "https://doctools.india" },
-        { name: "Signature to 20KB", url: "https://doctools.india/resize-signature-to-20kb" },
+        { name: "Home", url: "https://litefiles.vercel.app" },
+        { name: "Signature to 20KB", url: "https://litefiles.vercel.app/resize-signature-to-20kb" },
       ]} />
       <Navbar />
       <main className="tool-page">

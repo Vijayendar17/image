@@ -92,7 +92,6 @@ async function imagesToPdf(
   write("1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n");
 
   // Object 2: Pages (placeholder, will set count)
-  const pagesObjOffset = pos;
   objOffsets[2] = pos;
   const kids = pages.map((_, i) => `${3 + i * 2} 0 R`).join(" ");
   write(`2 0 obj\n<< /Type /Pages /Count ${pages.length} /Kids [${kids}] >>\nendobj\n`);

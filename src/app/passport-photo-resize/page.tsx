@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import PassportPhotoClient from "./PassportPhotoClient";
 import { WebAppSchema, FAQSchema, BreadcrumbSchema } from "../components/SchemaMarkup";
+import { siteConfig } from "../config";
 
 export const metadata: Metadata = {
   title: "Passport Photo Resize Online Free – 35x45mm, 50KB for VISA & Govt Forms",
@@ -16,6 +17,21 @@ export const metadata: Metadata = {
     "photo size for indian visa",
     "photo compress for aadhaar update",
   ],
+  alternates: {
+    canonical: `${siteConfig.baseUrl}/passport-photo-resize`,
+  },
+  openGraph: {
+    title: "Passport Photo Resize Online Free – 35x45mm, 50KB for VISA & Govt Forms",
+    description:
+      "Resize passport photo to 35×45mm for Indian VISA, PAN, Aadhaar, bank applications. Free, no signup.",
+    url: `${siteConfig.baseUrl}/passport-photo-resize`,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Passport Photo Resize Free – ${siteConfig.name}`,
+    description: "Resize & compress passport photo to 35×45mm, under 50KB. Accepted by all Indian portals.",
+  },
 };
 
 export default function PassportPhotoPage() {
@@ -31,13 +47,13 @@ export default function PassportPhotoPage() {
       <WebAppSchema
         name="Passport Photo Resize Online Free"
         description="Resize passport photo to 35x45mm or any standard size. Compress under 50KB for Indian VISA, PAN, Aadhaar, bank exam applications. Free, no signup."
-        url="https://doctools.india/passport-photo-resize"
+        url="https://litefiles.vercel.app/passport-photo-resize"
         keywords={["passport photo resize india", "resize photo for pan card", "photo size for indian visa", "passport photo 50kb online"]}
       />
       <FAQSchema faqs={faqs} />
       <BreadcrumbSchema items={[
-        { name: "Home", url: "https://doctools.india" },
-        { name: "Passport Photo Resize", url: "https://doctools.india/passport-photo-resize" },
+        { name: "Home", url: "https://litefiles.vercel.app" },
+        { name: "Passport Photo Resize", url: "https://litefiles.vercel.app/passport-photo-resize" },
       ]} />
       <Navbar />
       <main className="tool-page">

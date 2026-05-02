@@ -1,21 +1,22 @@
 import { MetadataRoute } from "next";
+import { siteConfig } from "./config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = "https://doctools.india"; // replace with your actual domain
+  const base = siteConfig.baseUrl;
   const routes = [
-    { url: "/", priority: 1.0 },
-    { url: "/compress-image-to-50kb", priority: 0.9 },
-    { url: "/passport-photo-resize", priority: 0.9 },
-    { url: "/resize-signature-to-20kb", priority: 0.9 },
-    { url: "/pdf-compressor", priority: 0.9 },
-    { url: "/image-to-pdf", priority: 0.8 },
-    { url: "/ssc-document-resize", priority: 0.85 },
+    { url: "/", priority: 1.0, changeFreq: "weekly" as const },
+    { url: "/compress-image-to-50kb", priority: 0.9, changeFreq: "monthly" as const },
+    { url: "/passport-photo-resize", priority: 0.9, changeFreq: "monthly" as const },
+    { url: "/resize-signature-to-20kb", priority: 0.9, changeFreq: "monthly" as const },
+    { url: "/pdf-compressor", priority: 0.9, changeFreq: "monthly" as const },
+    { url: "/image-to-pdf", priority: 0.8, changeFreq: "monthly" as const },
+    { url: "/ssc-document-resize", priority: 0.85, changeFreq: "monthly" as const },
   ];
 
   return routes.map((r) => ({
     url: `${base}${r.url}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly" as const,
+    lastModified: new Date("2026-05-02"),
+    changeFrequency: r.changeFreq,
     priority: r.priority,
   }));
 }

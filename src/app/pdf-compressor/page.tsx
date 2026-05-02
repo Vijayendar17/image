@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import PdfCompressorClient from "./PdfCompressorClient";
 import { WebAppSchema, FAQSchema, BreadcrumbSchema } from "../components/SchemaMarkup";
+import { siteConfig } from "../config";
 
 export const metadata: Metadata = {
   title: "Aadhaar PDF Compressor Free – Compress PDF Under 200KB, 1MB for Upload",
@@ -16,6 +17,21 @@ export const metadata: Metadata = {
     "pdf size reducer free india",
     "merge pdf under 2mb india",
   ],
+  alternates: {
+    canonical: `${siteConfig.baseUrl}/pdf-compressor`,
+  },
+  openGraph: {
+    title: "Aadhaar PDF Compressor Free – Under 200KB, 1MB for Upload",
+    description:
+      "Compress Aadhaar PDF, marksheets, certificates below 200KB for online portal uploads. Free PDF compressor for SSC, UPSC, bank applications.",
+    url: `${siteConfig.baseUrl}/pdf-compressor`,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Aadhaar PDF Compressor – ${siteConfig.name}`,
+    description: "Compress Aadhaar PDF under 200KB instantly. Free, private, no server uploads.",
+  },
 };
 
 export default function PdfCompressorPage() {
@@ -31,13 +47,13 @@ export default function PdfCompressorPage() {
       <WebAppSchema
         name="Aadhaar PDF Compressor – Free Online"
         description="Compress Aadhaar card PDF, marksheets, and certificates below 200KB or 1MB for online portal uploads. Free PDF size reducer for SSC, UPSC, bank applications."
-        url="https://doctools.india/pdf-compressor"
+        url="https://litefiles.vercel.app/pdf-compressor"
         keywords={["aadhaar pdf compressor", "compress pdf under 200kb free", "reduce pdf size india", "pdf compressor for government upload"]}
       />
       <FAQSchema faqs={faqs} />
       <BreadcrumbSchema items={[
-        { name: "Home", url: "https://doctools.india" },
-        { name: "PDF Compressor", url: "https://doctools.india/pdf-compressor" },
+        { name: "Home", url: "https://litefiles.vercel.app" },
+        { name: "PDF Compressor", url: "https://litefiles.vercel.app/pdf-compressor" },
       ]} />
       <Navbar />
       <main className="tool-page">

@@ -1,10 +1,17 @@
 import type { Metadata } from "next";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
+import { siteConfig } from "./config";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-plus-jakarta-sans" });
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.baseUrl),
   title: {
-    default: "DocTools India – Free Image & PDF Tools for Govt Forms",
-    template: "%s | DocTools India",
+    default: `${siteConfig.name} – Free Image & PDF Tools for Govt Forms`,
+    template: `%s | ${siteConfig.name}`,
   },
   description:
     "Free online tools to compress images, resize passport photos, reduce PDF size, and prepare documents for SSC, UPSC, and government form uploads. No signup required.",
@@ -17,14 +24,38 @@ export const metadata: Metadata = {
     "image compress for government upload",
     "whatsapp image compressor india",
   ],
+  authors: [{ name: siteConfig.name, url: siteConfig.baseUrl }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
   openGraph: {
     type: "website",
-    siteName: "DocTools India",
+    siteName: siteConfig.name,
     locale: "en_IN",
+    url: siteConfig.baseUrl,
+    title: `${siteConfig.name} – Free Image & PDF Tools for Govt Forms`,
+    description:
+      "Free tools for Indians: compress images, resize passport photos, reduce PDF size for SSC/UPSC uploads. Works instantly in browser. No signup needed.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${siteConfig.name} – Free Image & PDF Tools for Govt Forms`,
+    description:
+      "Compress images to 50KB, resize passport photos, reduce PDF — all free, instant, private. Made for Indian government form uploads.",
+    site: siteConfig.twitterHandle,
+  },
+  alternates: {
+    canonical: siteConfig.baseUrl,
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 
@@ -32,7 +63,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${plusJakartaSans.variable}`}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* PWA */}
@@ -43,13 +74,6 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="DocTools India" />
         <link rel="apple-touch-icon" href="/icon-192.png" />
-        {/* Fonts */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-          rel="stylesheet"
-        />
       </head>
       <body>
         {/* Offline banner */}
