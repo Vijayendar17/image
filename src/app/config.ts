@@ -1,6 +1,6 @@
 export const siteConfig = {
   domain: "litefiles.com",
   baseUrl: "https://litefiles.com",
-  name: "DocTools India",
-  twitterHandle: "@doctoolsindia",
+  name: "LiteFiles",
+  twitterHandle: "@litefiles",
 };

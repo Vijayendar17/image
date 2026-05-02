@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { siteConfig } from "../config";
 
 export default function Footer() {
   return (
@@ -7,7 +8,7 @@ export default function Footer() {
         <div className="footer-grid">
           <div>
             <Link href="/" className="nav-logo" style={{ fontSize: "1.1rem" }}>
-              ⚡ DocTools India
+              ⚡ {siteConfig.name}
             </Link>
             <p className="footer-brand-desc">
               Free, fast, and private document tools built for Indians. No signup, no uploads to servers. All processing happens in your browser.
@@ -36,7 +37,7 @@ export default function Footer() {
         </div>
         <div className="footer-bottom">
           <p className="footer-copy">
-            © {new Date().getFullYear()} DocTools India. All processing happens in your browser. We never store your files.
+            © {new Date().getFullYear()} {siteConfig.name}. All processing happens in your browser. We never store your files.
           </p>
           <p className="footer-copy" style={{ color: "var(--text-muted)" }}>
             🇮🇳 Made for India
