@@ -65,9 +65,13 @@ async function compressPdf(
 
   // Determine scale based on target size
   const perPageKB = targetKB / numPages;
-  const scale = perPageKB > 100 ? 1.5 : perPageKB > 50 ? 1.2 : perPageKB > 20 ? 1.0 : 0.8;
-  const jpegQuality = perPageKB > 100 ? 0.85 : perPageKB > 50 ? 0.72 : perPageKB > 20 ? 0.6 : 0.45;
+  const scale = perPageKB > 200 ? 1.5 
+              : perPageKB > 100 ? 1.2 
+              : perPageKB > 50 ? 1.0 
+              : perPageKB > 20 ? 0.8 
+              : 0.6;
 
+  const targetPageBytes = (targetKB * 1024 * 0.9) / numPages; // 10% reserved for PDF overhead
   const jpegs: Uint8Array[] = [];
   const dims: { w: number; h: number }[] = [];
 
@@ -80,8 +84,31 @@ async function compressPdf(
     const ctx = canvas.getContext("2d")!;
     await page.render({ canvasContext: ctx, viewport }).promise;
 
-    const blob: Blob = await new Promise((r) => canvas.toBlob((b) => r(b!), "image/jpeg", jpegQuality));
-    const buf = await blob.arrayBuffer();
+    // Binary search for the right JPEG quality to hit the target size
+    let low = 0.05;
+    let high = 0.95;
+    let bestBlob: Blob | null = null;
+    let bestQuality = 0.7; // default start
+
+    for (let attempt = 0; attempt < 6; attempt++) {
+      const mid = (low + high) / 2;
+      const blob: Blob = await new Promise((r) => canvas.toBlob((b) => r(b!), "image/jpeg", mid));
+      
+      if (blob.size <= targetPageBytes) {
+        bestBlob = blob;
+        low = mid; // We can afford higher quality
+        bestQuality = mid;
+      } else {
+        high = mid; // Size too big, need lower quality
+      }
+    }
+
+    // Fallback if even the lowest quality in our loop was too big
+    if (!bestBlob) {
+      bestBlob = await new Promise((r) => canvas.toBlob((b) => r(b!), "image/jpeg", 0.05));
+    }
+
+    const buf = await bestBlob!.arrayBuffer();
     jpegs.push(new Uint8Array(buf));
     dims.push({ w: Math.round(viewport.width), h: Math.round(viewport.height) });
     onProgress(Math.round((i / numPages) * 80));
