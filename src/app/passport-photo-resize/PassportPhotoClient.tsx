@@ -1,5 +1,6 @@
 "use client";
 import { useState, useRef, useCallback } from "react";
+import ImageCropper from "../components/ImageCropper";
 
 type PhotoPreset = {
   id: string;
@@ -30,11 +31,19 @@ function formatBytes(b: number) {
   return `${(b / (1024 * 1024)).toFixed(2)} MB`;
 }
 
+interface Crop {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
 async function processPhoto(
   file: File,
   widthPx: number,
   heightPx: number,
-  maxKB: number
+  maxKB: number,
+  manualCrop?: Crop & { zoom?: number; panX?: number; panY?: number }
 ): Promise<{ blob: Blob; url: string }> {
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -48,18 +57,53 @@ async function processPhoto(
       ctx.fillStyle = "#ffffff";
       ctx.fillRect(0, 0, widthPx, heightPx);
 
-      // Cover crop (center)
-      const srcAR = img.width / img.height;
-      const dstAR = widthPx / heightPx;
-      let sx = 0, sy = 0, sw = img.width, sh = img.height;
-      if (srcAR > dstAR) {
-        sw = img.height * dstAR;
-        sx = (img.width - sw) / 2;
+      if (manualCrop) {
+        // We use a temporary canvas to simulate the container view
+        // Container aspect ratio is 4/3 as defined in ImageCropper.tsx
+        const containerW = 800; // Virtual container width
+        const containerH = 600; // Virtual container height (4/3)
+        const tempCanvas = document.createElement("canvas");
+        tempCanvas.width = containerW;
+        tempCanvas.height = containerH;
+        const tctx = tempCanvas.getContext("2d")!;
+        
+        const zoom = manualCrop.zoom || 1;
+        const px = manualCrop.panX || 0;
+        const py = manualCrop.panY || 0;
+
+        // Simulate the CSS: display:flex; center; scale; translate
+        tctx.save();
+        tctx.translate(containerW / 2 + px, containerH / 2 + py);
+        tctx.scale(zoom, zoom);
+        
+        // Find scale to fit img in container (max-width/height 100%)
+        const fitScale = Math.min(containerW / img.width, containerH / img.height);
+        const iw = img.width * fitScale;
+        const ih = img.height * fitScale;
+        
+        tctx.drawImage(img, -iw / 2, -ih / 2, iw, ih);
+        tctx.restore();
+
+        // Now crop from tempCanvas
+        const bx = (manualCrop.x / 100) * containerW;
+        const by = (manualCrop.y / 100) * containerH;
+        const bw = (manualCrop.width / 100) * containerW;
+        const bh = (manualCrop.height / 100) * containerH;
+
+        ctx.drawImage(tempCanvas, bx, by, bw, bh, 0, 0, widthPx, heightPx);
       } else {
-        sh = img.width / dstAR;
-        sy = (img.height - sh) / 2;
+        const srcAR = img.width / img.height;
+        const dstAR = widthPx / heightPx;
+        let sx = 0, sy = 0, sw = img.width, sh = img.height;
+        if (srcAR > dstAR) {
+          sw = img.height * dstAR;
+          sx = (img.width - sw) / 2;
+        } else {
+          sh = img.width / dstAR;
+          sy = (img.height - sh) / 2;
+        }
+        ctx.drawImage(img, sx, sy, sw, sh, 0, 0, widthPx, heightPx);
       }
-      ctx.drawImage(img, sx, sy, sw, sh, 0, 0, widthPx, heightPx);
 
       const targetBytes = maxKB * 1024;
       let lo = 0.01, hi = 0.99, bestBlob: Blob | null = null;
@@ -103,6 +147,8 @@ export default function PassportPhotoClient() {
   const [result, setResult] = useState<{ blob: Blob; url: string; width: number; height: number } | null>(null);
   const [error, setError] = useState("");
   const [dragging, setDragging] = useState(false);
+  const [isManualCrop, setIsManualCrop] = useState(false);
+  const [manualCrop, setManualCrop] = useState<Crop | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleFile = useCallback((f: File) => {
@@ -110,6 +156,7 @@ export default function PassportPhotoClient() {
     setFile(f);
     setError("");
     setResult(null);
+    setIsManualCrop(false);
     const reader = new FileReader();
     reader.onload = (e) => setPreview(e.target?.result as string);
     reader.readAsDataURL(f);
@@ -127,7 +174,7 @@ export default function PassportPhotoClient() {
       const kb = isCustom ? parseFloat(customKB) : preset.maxKB;
       const wPx = mmToPx(wMM, preset.dpi);
       const hPx = mmToPx(hMM, preset.dpi);
-      const { blob, url } = await processPhoto(file, wPx, hPx, kb);
+      const { blob, url } = await processPhoto(file, wPx, hPx, kb, isManualCrop ? manualCrop || undefined : undefined);
       setResult({ blob, url, width: wPx, height: hPx });
     } catch {
       setError("Processing failed. Please try again.");
@@ -171,9 +218,47 @@ export default function PassportPhotoClient() {
 
         {/* Preview + Settings */}
         {file && preview && (
-          <div style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: "1.5rem", alignItems: "start" }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={preview} alt="Preview" style={{ width: 140, height: 180, objectFit: "cover", borderRadius: 10, border: "1px solid var(--border)" }} />
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem", alignItems: "start" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <p style={{ fontSize: "0.9rem", fontWeight: 600, color: "var(--text-secondary)" }}>
+                  {isManualCrop ? "Adjust Crop Area" : "Auto-Crop Preview"}
+                </p>
+                <button 
+                  className={`btn ${isManualCrop ? "btn-blue" : "btn-secondary"}`}
+                  style={{ padding: "0.25rem 0.6rem", fontSize: "0.75rem" }}
+                  onClick={() => setIsManualCrop(!isManualCrop)}
+                >
+                  {isManualCrop ? "✓ Done" : "✂️ Manual Crop"}
+                </button>
+              </div>
+              
+              {isManualCrop ? (
+                <ImageCropper 
+                  imageSrc={preview} 
+                  aspectRatio={preset.id === "custom" ? (parseFloat(customW) / parseFloat(customH)) : (preset.widthMM / preset.heightMM)}
+                  onCropChange={setManualCrop}
+                />
+              ) : (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img 
+                  src={preview} 
+                  alt="Preview" 
+                  style={{ 
+                    width: "100%", 
+                    height: "auto", 
+                    maxHeight: 400, 
+                    objectFit: "contain", 
+                    borderRadius: 10, 
+                    border: "1px solid var(--border)" 
+                  }} 
+                />
+              )}
+              <p style={{ fontSize: "0.75rem", color: "var(--text-muted)", textAlign: "center" }}>
+                {isManualCrop ? "Drag corners to resize · Drag center to move" : "Image is automatically centered. Use Manual Crop for precise control."}
+              </p>
+            </div>
+
             <div className="card" style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
               <div>
                 <label className="input-label">Select Preset</label>
