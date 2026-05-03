@@ -135,8 +135,8 @@ export default function ImageCropper({ imageSrc, aspectRatio, onCropChange }: Im
             }
           }
 
-          // Maintain target aspect ratio if provided
-          if (aspectRatio) {
+          // Maintain target aspect ratio if provided, but ONLY for corner handles
+          if (aspectRatio && dragType.length === 2) {
             const containerAR = naturalW / naturalH;
             // (w_px/h_px) = aspectRatio => (w%*cW)/(h%*cH) = aspectRatio => w/h = aspectRatio/containerAR
             const ratio = aspectRatio / containerAR;
