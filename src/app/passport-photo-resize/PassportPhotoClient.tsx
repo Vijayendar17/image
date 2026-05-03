@@ -144,7 +144,7 @@ export default function PassportPhotoClient() {
   const [result, setResult] = useState<{ blob: Blob; url: string; width: number; height: number } | null>(null);
   const [error, setError] = useState("");
   const [dragging, setDragging] = useState(false);
-  const [isManualCrop, setIsManualCrop] = useState(false);
+  const [isManualCrop, setIsManualCrop] = useState(true);
   const [manualCrop, setManualCrop] = useState<Crop | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -153,7 +153,7 @@ export default function PassportPhotoClient() {
     setFile(f);
     setError("");
     setResult(null);
-    setIsManualCrop(false);
+    setIsManualCrop(true);
     const reader = new FileReader();
     reader.onload = (e) => setPreview(e.target?.result as string);
     reader.readAsDataURL(f);
@@ -219,14 +219,14 @@ export default function PassportPhotoClient() {
             <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <p style={{ fontSize: "0.9rem", fontWeight: 600, color: "var(--text-secondary)" }}>
-                  {isManualCrop ? "Adjust Crop Area" : "Auto-Crop Preview"}
+                  {isManualCrop ? "Adjust Crop Area" : "Original Image Preview"}
                 </p>
                 <button 
                   className={`btn ${isManualCrop ? "btn-blue" : "btn-secondary"}`}
                   style={{ padding: "0.25rem 0.6rem", fontSize: "0.75rem" }}
                   onClick={() => setIsManualCrop(!isManualCrop)}
                 >
-                  {isManualCrop ? "✓ Done" : "✂️ Manual Crop"}
+                  {isManualCrop ? "✓ Hide Cropper" : "✂️ Show Cropper"}
                 </button>
               </div>
               

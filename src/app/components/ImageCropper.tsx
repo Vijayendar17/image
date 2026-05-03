@@ -39,39 +39,32 @@ export default function ImageCropper({ imageSrc, aspectRatio, onCropChange }: Im
     const nh = imgRef.current.naturalHeight;
     setNaturalW(nw);
     setNaturalH(nh);
-    // Clamp to reasonable display bounds: max 16/9, min 1/2
     const ar = nw / nh;
     const clampedAr = Math.min(Math.max(ar, 0.5), 16 / 9);
     setImgAspectRatio(`${clampedAr}`);
     setImgLoaded(true);
+  };
 
-    if (aspectRatio) {
-      // Initialize crop box to match target aspect ratio
-      const containerAR = clampedAr;
-      // crop box dimensions in % of container
-      let w = 80;
-      let h = (w / containerAR) * (1 / aspectRatio) * containerAR;
-      // Simpler: the crop box percent width/height represent fractions of the container
-      // Target aspect ratio in container-space:
-      // (w% * containerW) / (h% * containerH) = aspectRatio
-      // => w/h = aspectRatio * containerH / containerW = aspectRatio / containerAR
-      h = w * (1 / aspectRatio) / containerAR;
-      // h should be expressed as % of containerH, w as % of containerW
-      // Actually let's think in terms of the container pixel space:
-      // w_px = w% * containerW, h_px = h% * containerH
-      // w_px / h_px = w% * containerW / (h% * containerH) = (w/h) * containerAR = targetAR
-      // So: w/h = targetAR / containerAR
+  useEffect(() => {
+    if (imgLoaded && aspectRatio) {
+      const ar = naturalW / naturalH;
+      const clampedAr = Math.min(Math.max(ar, 0.5), 16 / 9);
       const ratio = aspectRatio / clampedAr;
-      w = 80;
-      h = w / ratio;
+      let w = 80;
+      let h = w / ratio;
       if (h > 90) { h = 90; w = h * ratio; }
       if (w > 90) { w = 90; h = w / ratio; }
 
       const newCrop = { x: (100 - w) / 2, y: (100 - h) / 2, width: w, height: h };
       setCrop(newCrop);
-      updateParent(newCrop, 1, { x: 0, y: 0 }, nw, nh);
+      // Don't call updateParent immediately in effect to avoid loops, 
+      // but we should pass the initial state up.
+      // We can rely on endDrag or the parent's current state, 
+      // but it's better to update it safely:
+      onCropChange({ ...newCrop, zoom, panX: pan.x, panY: pan.y, naturalW, naturalH });
     }
-  };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [aspectRatio, imgLoaded, naturalW, naturalH]);
 
   const updateParent = useCallback((
     c: Crop,

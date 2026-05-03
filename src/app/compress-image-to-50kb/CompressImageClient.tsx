@@ -162,7 +162,7 @@ export default function CompressImageClient() {
   const [customKB, setCustomKB] = useState("");
   const maxDim = 1920;
   const [compressing, setCompressing] = useState(false);
-  const [isManualCrop, setIsManualCrop] = useState(false);
+  const [isManualCrop, setIsManualCrop] = useState(true);
   const [manualCrop, setManualCrop] = useState<Crop | null>(null);
   const [result, setResult] = useState<{
     blob: Blob;
@@ -183,7 +183,7 @@ export default function CompressImageClient() {
     setFile(f);
     setError("");
     setResult(null);
-    setIsManualCrop(false);
+    setIsManualCrop(true);
     const reader = new FileReader();
     reader.onload = (e) => setPreview(e.target?.result as string);
     reader.readAsDataURL(f);
@@ -280,7 +280,7 @@ export default function CompressImageClient() {
           <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <p style={{ fontSize: "0.9rem", fontWeight: 600, color: "var(--text-secondary)" }}>
-                {isManualCrop ? "Adjust Crop Area" : "Image Preview"}
+                {isManualCrop ? "Adjust Crop Area" : "Original Image Preview"}
               </p>
               {file && (
                 <button 
@@ -288,7 +288,7 @@ export default function CompressImageClient() {
                   style={{ padding: "0.25rem 0.6rem", fontSize: "0.75rem" }}
                   onClick={() => setIsManualCrop(!isManualCrop)}
                 >
-                  {isManualCrop ? "✓ Done" : "✂️ Edit & Crop"}
+                  {isManualCrop ? "✓ Hide Cropper" : "✂️ Show Cropper"}
                 </button>
               )}
             </div>
