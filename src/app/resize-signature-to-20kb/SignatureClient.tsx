@@ -9,6 +9,7 @@ const PRESETS = [
   { id: "rrb", label: "RRB NTPC", widthPx: 140, heightPx: 60, maxKB: 20, desc: "140×60px · <20KB" },
   { id: "custom20", label: "20KB", widthPx: 140, heightPx: 60, maxKB: 20, desc: "Generic 20KB" },
   { id: "custom50", label: "50KB", widthPx: 200, heightPx: 100, maxKB: 50, desc: "Generic 50KB" },
+  { id: "custom", label: "Custom", widthPx: 0, heightPx: 0, maxKB: 0, desc: "Set your own" },
 ];
 
 function formatBytes(b: number) {
@@ -72,6 +73,9 @@ async function processSignature(
 export default function SignatureClient() {
   const [file, setFile] = useState<File | null>(null);
   const [preset, setPreset] = useState(PRESETS[0]);
+  const [customW, setCustomW] = useState("140");
+  const [customH, setCustomH] = useState("60");
+  const [customKB, setCustomKB] = useState("20");
   const [processing, setProcessing] = useState(false);
   const [result, setResult] = useState<{ blob: Blob; url: string } | null>(null);
   const [error, setError] = useState("");
@@ -87,10 +91,18 @@ export default function SignatureClient() {
     if (!file) return;
     setProcessing(true); setError(""); setResult(null);
     try {
-      const res = await processSignature(file, preset.widthPx, preset.heightPx, preset.maxKB);
+      const w = preset.id === "custom" ? parseInt(customW) : preset.widthPx;
+      const h = preset.id === "custom" ? parseInt(customH) : preset.heightPx;
+      const kb = preset.id === "custom" ? parseInt(customKB) : preset.maxKB;
+      
+      if (isNaN(w) || isNaN(h) || isNaN(kb)) {
+        throw new Error("Please enter valid numbers");
+      }
+
+      const res = await processSignature(file, w, h, kb);
       setResult(res);
-    } catch {
-      setError("Processing failed. Try a different image.");
+    } catch (e: any) {
+      setError(e.message || "Processing failed. Try a different image.");
     } finally {
       setProcessing(false);
     }
@@ -143,9 +155,36 @@ export default function SignatureClient() {
               </div>
             </div>
 
+            {preset.id === "custom" && (
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1rem" }}>
+                <div>
+                  <label className="input-label">Width (px)</label>
+                  <input type="number" className="input-field" value={customW} onChange={(e) => setCustomW(e.target.value)} />
+                </div>
+                <div>
+                  <label className="input-label">Height (px)</label>
+                  <input type="number" className="input-field" value={customH} onChange={(e) => setCustomH(e.target.value)} />
+                </div>
+                <div>
+                  <label className="input-label">Max Size (KB)</label>
+                  <input type="number" className="input-field" value={customKB} onChange={(e) => setCustomKB(e.target.value)} />
+                </div>
+              </div>
+            )}
+
             <div className="stats-row">
-              <div className="stat-item"><div className="stat-value">{preset.widthPx}×{preset.heightPx}</div><div className="stat-label">Pixels</div></div>
-              <div className="stat-item"><div className="stat-value">&lt;{preset.maxKB}KB</div><div className="stat-label">Max Size</div></div>
+              <div className="stat-item">
+                <div className="stat-value">
+                  {preset.id === "custom" ? `${customW}×${customH}` : `${preset.widthPx}×${preset.heightPx}`}
+                </div>
+                <div className="stat-label">Pixels</div>
+              </div>
+              <div className="stat-item">
+                <div className="stat-value">
+                  &lt;{preset.id === "custom" ? customKB : preset.maxKB}KB
+                </div>
+                <div className="stat-label">Max Size</div>
+              </div>
               <div className="stat-item"><div className="stat-value">JPG</div><div className="stat-label">Format</div></div>
             </div>
 
