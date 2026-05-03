@@ -247,8 +247,8 @@ export default function ImageCropper({ imageSrc, aspectRatio, onCropChange }: Im
               <div style={{ position: 'absolute', left: '33.33%', top: 0, bottom: 0, width: '1px', background: 'rgba(255,255,255,0.4)', pointerEvents: 'none' }} />
               <div style={{ position: 'absolute', left: '66.66%', top: 0, bottom: 0, width: '1px', background: 'rgba(255,255,255,0.4)', pointerEvents: 'none' }} />
 
-              {/* Corner handles */}
-              {['nw', 'ne', 'sw', 'se'].map(h => (
+              {/* Handles */}
+              {['nw', 'ne', 'sw', 'se', 'n', 's', 'e', 'w'].map(h => (
                 <div
                   key={h}
                   onMouseDown={(e) => { e.stopPropagation(); startDrag(e, h); }}
@@ -261,8 +261,8 @@ export default function ImageCropper({ imageSrc, aspectRatio, onCropChange }: Im
                     border: '2px solid #ff6b35',
                     borderRadius: '50%',
                     zIndex: 11,
-                    ...(h.includes('n') ? { top: '-8px' } : { bottom: '-8px' }),
-                    ...(h.includes('w') ? { left: '-8px' } : { right: '-8px' }),
+                    ...(h.includes('n') ? { top: '-8px' } : h.includes('s') ? { bottom: '-8px' } : { top: 'calc(50% - 8px)' }),
+                    ...(h.includes('w') ? { left: '-8px' } : h.includes('e') ? { right: '-8px' } : { left: 'calc(50% - 8px)' }),
                     cursor: `${h}-resize`
                   }}
                 />
