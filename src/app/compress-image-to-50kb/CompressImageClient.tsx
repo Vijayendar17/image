@@ -29,7 +29,7 @@ async function compressImage(
   targetKB: number,
   maxWidth: number,
   maxHeight: number,
-  manualCrop?: Crop & { zoom?: number; panX?: number; panY?: number }
+  manualCrop?: Crop & { zoom?: number; panX?: number; panY?: number; naturalW?: number; naturalH?: number }
 ): Promise<{ blob: Blob; quality: number; width: number; height: number }> {
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -41,14 +41,14 @@ async function compressImage(
       let dw, dh;
       
       if (manualCrop) {
-        // Virtual container math (4/3 aspect ratio)
-        const containerW = 800;
-        const containerH = 600;
+        // Use image natural dimensions as virtual container for pixel-accurate mapping
+        const containerW = manualCrop.naturalW || img.width;
+        const containerH = manualCrop.naturalH || img.height;
         const tempCanvas = document.createElement("canvas");
         tempCanvas.width = containerW;
         tempCanvas.height = containerH;
         const tctx = tempCanvas.getContext("2d")!;
-        
+
         const zoom = manualCrop.zoom || 1;
         const px = manualCrop.panX || 0;
         const py = manualCrop.panY || 0;
@@ -56,11 +56,9 @@ async function compressImage(
         tctx.save();
         tctx.translate(containerW / 2 + px, containerH / 2 + py);
         tctx.scale(zoom, zoom);
-        
         const fitScale = Math.min(containerW / img.width, containerH / img.height);
         const iw = img.width * fitScale;
         const ih = img.height * fitScale;
-        
         tctx.drawImage(img, -iw / 2, -ih / 2, iw, ih);
         tctx.restore();
 

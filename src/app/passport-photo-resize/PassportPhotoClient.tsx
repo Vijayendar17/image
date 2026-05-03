@@ -43,7 +43,7 @@ async function processPhoto(
   widthPx: number,
   heightPx: number,
   maxKB: number,
-  manualCrop?: Crop & { zoom?: number; panX?: number; panY?: number }
+  manualCrop?: Crop & { zoom?: number; panX?: number; panY?: number; naturalW?: number; naturalH?: number }
 ): Promise<{ blob: Blob; url: string }> {
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -58,33 +58,30 @@ async function processPhoto(
       ctx.fillRect(0, 0, widthPx, heightPx);
 
       if (manualCrop) {
-        // We use a temporary canvas to simulate the container view
-        // Container aspect ratio is 4/3 as defined in ImageCropper.tsx
-        const containerW = 800; // Virtual container width
-        const containerH = 600; // Virtual container height (4/3)
+        // Use image natural dimensions as virtual container for pixel-accurate mapping
+        const nw = manualCrop.naturalW || img.width;
+        const nh = manualCrop.naturalH || img.height;
+        const containerW = nw;
+        const containerH = nh;
         const tempCanvas = document.createElement("canvas");
         tempCanvas.width = containerW;
         tempCanvas.height = containerH;
         const tctx = tempCanvas.getContext("2d")!;
-        
+
         const zoom = manualCrop.zoom || 1;
         const px = manualCrop.panX || 0;
         const py = manualCrop.panY || 0;
 
-        // Simulate the CSS: display:flex; center; scale; translate
+        // Simulate the CSS flex-center + translate + scale applied in the UI
         tctx.save();
         tctx.translate(containerW / 2 + px, containerH / 2 + py);
         tctx.scale(zoom, zoom);
-        
-        // Find scale to fit img in container (max-width/height 100%)
         const fitScale = Math.min(containerW / img.width, containerH / img.height);
         const iw = img.width * fitScale;
         const ih = img.height * fitScale;
-        
         tctx.drawImage(img, -iw / 2, -ih / 2, iw, ih);
         tctx.restore();
 
-        // Now crop from tempCanvas
         const bx = (manualCrop.x / 100) * containerW;
         const by = (manualCrop.y / 100) * containerH;
         const bw = (manualCrop.width / 100) * containerW;
