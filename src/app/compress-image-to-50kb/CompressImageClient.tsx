@@ -38,6 +38,8 @@ async function compressImage(
       URL.revokeObjectURL(url);
       const canvas = document.createElement("canvas");
       
+      let dw, dh;
+      
       if (manualCrop) {
         // Virtual container math (4/3 aspect ratio)
         const containerW = 800;
@@ -67,8 +69,8 @@ async function compressImage(
         const bw = (manualCrop.width / 100) * containerW;
         const bh = (manualCrop.height / 100) * containerH;
 
-        let dw = bw;
-        let dh = bh;
+        dw = bw;
+        dh = bh;
         if (dw > maxWidth || dh > maxHeight) {
           const ratio = Math.min(maxWidth / dw, maxHeight / dh);
           dw = Math.round(dw * ratio);
@@ -82,10 +84,10 @@ async function compressImage(
         ctx.fillRect(0, 0, dw, dh);
         ctx.drawImage(tempCanvas, bx, by, bw, bh, 0, 0, dw, dh);
       } else {
-        let sw = img.width;
-        let sh = img.height;
-        let dw = sw;
-        let dh = sh;
+        const sw = img.width;
+        const sh = img.height;
+        dw = sw;
+        dh = sh;
 
         if (dw > maxWidth || dh > maxHeight) {
           const ratio = Math.min(maxWidth / dw, maxHeight / dh);
