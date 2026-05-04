@@ -5,9 +5,9 @@ import Footer from "./components/Footer";
 import { WebsiteSchema } from "./components/SchemaMarkup";
 
 export const metadata: Metadata = {
-  title: "DocTools India – Free Image & PDF Tools for Govt Forms | No Signup",
+  title: "LiteFiles | Free Image & PDF Tools Online",
   description:
-    "Free tools for Indians: compress images to 50KB, resize passport photos, reduce PDF size for SSC/UPSC uploads. Works instantly in browser. No signup needed.",
+    "LiteFiles offers free online tools for image compression, PDF conversion, resizing, and document utilities.",
 };
 
 const tools = [
@@ -85,9 +85,7 @@ export default function HomePage() {
           <div className="container">
             <p className="hero-eyebrow">🇮🇳 Designed for Indian Government Portals</p>
             <h1 className="hero-title">
-              Free Tools to Prepare
-              <br />
-              <span>Docs for Govt Uploads</span>
+              LiteFiles – Free Online File Tools
             </h1>
             <p className="hero-subtitle">
               Compress images to 50KB, resize passport photos, reduce PDF size — everything you need for SSC, UPSC, bank exam, and job application portals. Works instantly. No signup.
@@ -175,7 +173,7 @@ export default function HomePage() {
         <section style={{ padding: "4rem 0", borderTop: "1px solid var(--border)" }}>
           <div className="container">
             <div style={{ textAlign: "center", marginBottom: "2.5rem" }}>
-              <span className="badge badge-green">Why DocTools?</span>
+              <span className="badge badge-green">Why LiteFiles?</span>
               <h2 className="section-title" style={{ textAlign: "center", marginTop: "0.75rem" }}>
                 Built for Indian Job Seekers
               </h2>

@@ -96,7 +96,7 @@ export function WebsiteSchema() {
     "@type": "WebSite",
     "name": SITE_NAME,
     "url": SITE_URL,
-    "description": "Free image and PDF tools for Indian government form uploads. Compress images, resize passport photos, and prepare documents for SSC, UPSC, and other exam portals.",
+    "description": "LiteFiles offers free online tools for image compression, PDF conversion, resizing, and document utilities.",
     "inLanguage": "en-IN",
   };
 

@@ -10,11 +10,11 @@ const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--fon
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.baseUrl),
   title: {
-    default: `${siteConfig.name} – Free Image & PDF Tools for Govt Forms`,
+    default: "LiteFiles | Free Image & PDF Tools Online",
     template: `%s | ${siteConfig.name}`,
   },
   description:
-    "Free online tools to compress images, resize passport photos, reduce PDF size, and prepare documents for SSC, UPSC, and government form uploads. No signup required.",
+    "LiteFiles offers free online tools for image compression, PDF conversion, resizing, and document utilities.",
   keywords: [
     "compress image to 50kb",
     "passport photo resize india",
@@ -32,15 +32,15 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     locale: "en_IN",
     url: siteConfig.baseUrl,
-    title: `${siteConfig.name} – Free Image & PDF Tools for Govt Forms`,
+    title: "LiteFiles | Free Image & PDF Tools Online",
     description:
-      "Free tools for Indians: compress images, resize passport photos, reduce PDF size for SSC/UPSC uploads. Works instantly in browser. No signup needed.",
+      "LiteFiles offers free online tools for image compression, PDF conversion, resizing, and document utilities.",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} – Free Image & PDF Tools for Govt Forms`,
+    title: "LiteFiles | Free Image & PDF Tools Online",
     description:
-      "Compress images to 50KB, resize passport photos, reduce PDF — all free, instant, private. Made for Indian government form uploads.",
+      "LiteFiles offers free online tools for image compression, PDF conversion, resizing, and document utilities.",
     site: siteConfig.twitterHandle,
   },
   alternates: {
@@ -72,7 +72,7 @@ export default function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="apple-mobile-web-app-title" content="DocTools India" />
+        <meta name="apple-mobile-web-app-title" content="LiteFiles" />
         <link rel="apple-touch-icon" href="/icon-192.png" />
       </head>
       <body>
