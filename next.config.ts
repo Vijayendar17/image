@@ -3,6 +3,16 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   turbopack: {},
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.litefiles.com" }],
+        destination: "https://litefiles.com/:path*",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default withPWA({
