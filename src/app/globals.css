@@ -848,22 +848,6 @@ input[type="range"]::-webkit-slider-thumb:hover {
     min-height: 48px;
   }
 
-  /* Compress tool: stack cropper above target size on mobile */
-  .compress-settings-grid {
-    grid-template-columns: 1fr;
-  }
-
-  /* Cropper label + button: stack vertically */
-  .cropper-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-
-  .cropper-header .btn {
-    align-self: flex-end;
-    min-height: 40px;
-  }
 
   /* Nav links: ensure tappable spacing */
   .nav-links a {
@@ -903,47 +887,6 @@ input[type="range"]::-webkit-slider-thumb:hover {
     padding: 0 1rem 3rem;
   }
 
-  /* Preset target-size buttons: 2×2 grid on mobile */
-  .preset-btn-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .preset-btn {
-    width: 100%;
-    min-height: 48px;
-    font-size: 0.9rem;
-    padding: 0.5rem;
-  }
-}
-
-/* ===== Compress Tool Layout ===== */
-.compress-settings-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  align-items: start;
-}
-
-.cropper-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* Preset target-size buttons: flex row on desktop */
-.preset-btn-grid {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  margin-bottom: 0.75rem;
-}
-
-.preset-btn {
-  padding: 0.4rem 0.9rem;
-  font-size: 0.85rem;
 }
 
 /* ===== SEO Rich Content Sections ===== */

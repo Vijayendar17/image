@@ -276,9 +276,9 @@ export default function CompressImageClient() {
         </div>
 
         {/* Settings (Always visible) */}
-        <div className="compress-settings-grid">
+        <div className="flex flex-col md:grid md:grid-cols-2 gap-6 items-start w-full">
           <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-            <div className="cropper-header">
+            <div className="flex flex-col md:flex-row justify-between md:items-center items-start gap-2 md:gap-0">
               <p style={{ fontSize: "0.9rem", fontWeight: 600, color: "var(--text-secondary)" }}>
                 {isManualCrop ? "Adjust Crop Area" : "Original Image Preview"}
               </p>
@@ -335,12 +335,12 @@ export default function CompressImageClient() {
           <div className="card" style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
             <div>
               <label className="input-label" htmlFor="custom-kb">Target Size</label>
-              <div className="preset-btn-grid">
+              <div className="grid grid-cols-2 gap-2 mb-3 w-full">
                 {PRESETS.map((p) => (
                   <button
                     key={p.kb}
                     id={`preset-${p.kb}kb`}
-                    className={`btn ${targetKB === p.kb && !customKB ? "btn-blue" : "btn-secondary"} preset-btn`}
+                    className={`btn ${targetKB === p.kb && !customKB ? "btn-blue" : "btn-secondary"} min-h-[52px] w-full`}
                     onClick={() => { setTargetKB(p.kb); setCustomKB(""); }}
                   >
                     {p.label}
@@ -350,19 +350,18 @@ export default function CompressImageClient() {
               <input
                 id="custom-kb"
                 type="number"
-                className="input-field"
+                className="input-field w-full md:max-w-[250px]"
                 placeholder="Or type custom size in KB..."
                 value={customKB}
                 onChange={(e) => { setCustomKB(e.target.value); setTargetKB(0); }}
                 min={1}
                 max={10000}
-                style={{ maxWidth: "250px" }}
               />
             </div>
 
             <button
               id="compress-btn"
-              className="btn btn-primary btn-lg"
+              className="btn btn-primary btn-lg w-full"
               onClick={handleCompress}
               disabled={compressing || !file}
               style={{ opacity: !file ? 0.7 : 1 }}
