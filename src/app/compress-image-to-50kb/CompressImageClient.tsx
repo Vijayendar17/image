@@ -239,7 +239,7 @@ export default function CompressImageClient() {
     : 0;
 
   return (
-    <div className="tool-content">
+    <div className="tool-content" style={{ overflowX: "hidden" }}>
       <div className="tool-workspace">
         {/* Upload */}
         <div
@@ -276,9 +276,9 @@ export default function CompressImageClient() {
         </div>
 
         {/* Settings (Always visible) */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem", alignItems: "start" }}>
+        <div className="compress-settings-grid">
           <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <div className="cropper-header">
               <p style={{ fontSize: "0.9rem", fontWeight: 600, color: "var(--text-secondary)" }}>
                 {isManualCrop ? "Adjust Crop Area" : "Original Image Preview"}
               </p>
@@ -324,13 +324,12 @@ export default function CompressImageClient() {
           <div className="card" style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
             <div>
               <label className="input-label" htmlFor="custom-kb">Target Size</label>
-              <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", marginBottom: "0.75rem" }}>
+              <div className="preset-btn-grid">
                 {PRESETS.map((p) => (
                   <button
                     key={p.kb}
                     id={`preset-${p.kb}kb`}
-                    className={`btn ${targetKB === p.kb && !customKB ? "btn-blue" : "btn-secondary"}`}
-                    style={{ padding: "0.4rem 0.9rem", fontSize: "0.85rem" }}
+                    className={`btn ${targetKB === p.kb && !customKB ? "btn-blue" : "btn-secondary"} preset-btn`}
                     onClick={() => { setTargetKB(p.kb); setCustomKB(""); }}
                   >
                     {p.label}
