@@ -237,6 +237,10 @@ select.input-field option {
   display: block;
 }
 
+.change-image-btn-mobile {
+  display: none;
+}
+
 /* Progress */
 .progress-bar {
   width: 100%;
@@ -870,6 +874,16 @@ input[type="range"]::-webkit-slider-thumb:hover {
   /* Drop zone: reduce vertical padding on mobile */
   .drop-zone {
     padding: 2rem 1rem;
+  }
+
+  /* Hide the large drop zone entirely if a file is already selected on mobile */
+  .drop-zone.has-file {
+    display: none;
+  }
+
+  /* Show the mobile-only 'Change Image' button */
+  .change-image-btn-mobile {
+    display: inline-flex;
   }
 
   /* Container base padding */

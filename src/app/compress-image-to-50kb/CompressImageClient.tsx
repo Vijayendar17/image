@@ -243,7 +243,7 @@ export default function CompressImageClient() {
       <div className="tool-workspace">
         {/* Upload */}
         <div
-          className={`drop-zone ${dragging ? "drag-over" : ""}`}
+          className={`drop-zone ${dragging ? "drag-over" : ""} ${file ? "has-file" : ""}`}
           onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
           onDragLeave={() => setDragging(false)}
           onDrop={handleDrop}
@@ -282,15 +282,26 @@ export default function CompressImageClient() {
               <p style={{ fontSize: "0.9rem", fontWeight: 600, color: "var(--text-secondary)" }}>
                 {isManualCrop ? "Adjust Crop Area" : "Original Image Preview"}
               </p>
-              {file && (
-                <button 
-                  className={`btn ${isManualCrop ? "btn-blue" : "btn-secondary"}`}
-                  style={{ padding: "0.25rem 0.6rem", fontSize: "0.75rem" }}
-                  onClick={() => setIsManualCrop(!isManualCrop)}
-                >
-                  {isManualCrop ? "✓ Hide Cropper" : "✂️ Show Cropper"}
-                </button>
-              )}
+              <div style={{ display: "flex", gap: "0.5rem" }}>
+                {file && (
+                  <button 
+                    className="btn btn-secondary change-image-btn-mobile"
+                    style={{ padding: "0.25rem 0.6rem", fontSize: "0.75rem" }}
+                    onClick={() => inputRef.current?.click()}
+                  >
+                    🔄 Change
+                  </button>
+                )}
+                {file && (
+                  <button 
+                    className={`btn ${isManualCrop ? "btn-blue" : "btn-secondary"}`}
+                    style={{ padding: "0.25rem 0.6rem", fontSize: "0.75rem" }}
+                    onClick={() => setIsManualCrop(!isManualCrop)}
+                  >
+                    {isManualCrop ? "✓ Hide Cropper" : "✂️ Show Cropper"}
+                  </button>
+                )}
+              </div>
             </div>
             
             {file && preview ? (
