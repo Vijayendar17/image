@@ -238,7 +238,7 @@ export default function CompressImageClient() {
     : 0;
 
   return (
-    <div className="tool-content" style={{ overflowX: "hidden" }}>
+    <div className="tool-content">
       <div className="tool-workspace">
         {/* Upload */}
         <div
@@ -275,8 +275,8 @@ export default function CompressImageClient() {
         </div>
 
         {/* Settings (Always visible) */}
-        <div className="flex flex-col md:grid md:grid-cols-[65%_35%] gap-6 items-start w-full">
-          <div style={{ display: "flex", flexDirection: "column", gap: "1rem", minWidth: 0 }}>
+        <div className="flex flex-col md:flex-row gap-6 items-start w-full">
+          <div className="flex-1 min-w-0" style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
             <div className="flex flex-col md:flex-row justify-between md:items-center items-start gap-2 md:gap-0">
               <p style={{ fontSize: "0.9rem", fontWeight: 600, color: "var(--text-secondary)" }}>
                 {isManualCrop ? "Adjust Crop Area" : "Original Image Preview"}
@@ -331,7 +331,7 @@ export default function CompressImageClient() {
             )}
           </div>
 
-          <div className="card" style={{ display: "flex", flexDirection: "column", gap: "1.25rem", minWidth: 0, overflow: "hidden", maxWidth: "100%" }}>
+          <div className="card w-full md:w-[280px] md:min-w-[280px] md:flex-shrink-0" style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
             <div>
               <label className="input-label" htmlFor="custom-kb">Target Size</label>
               <div className="grid grid-cols-2 gap-2 mb-3 w-full">
@@ -349,7 +349,7 @@ export default function CompressImageClient() {
               <input
                 id="custom-kb"
                 type="number"
-                className="input-field w-full md:max-w-[250px]"
+                className="input-field w-full"
                 placeholder="Or type custom size in KB..."
                 value={customKB}
                 onChange={(e) => { setCustomKB(e.target.value); setTargetKB(0); }}
