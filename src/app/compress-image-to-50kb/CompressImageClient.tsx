@@ -8,7 +8,6 @@ const PRESETS = [
   { label: "50 KB", kb: 50 },
   { label: "100 KB", kb: 100 },
   { label: "200 KB", kb: 200 },
-  { label: "500 KB", kb: 500 },
 ];
 
 function formatBytes(bytes: number) {
@@ -276,8 +275,8 @@ export default function CompressImageClient() {
         </div>
 
         {/* Settings (Always visible) */}
-        <div className="flex flex-col md:grid md:grid-cols-2 gap-6 items-start w-full">
-          <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+        <div className="flex flex-col md:grid md:grid-cols-[65%_35%] gap-6 items-start w-full">
+          <div style={{ display: "flex", flexDirection: "column", gap: "1rem", minWidth: 0 }}>
             <div className="flex flex-col md:flex-row justify-between md:items-center items-start gap-2 md:gap-0">
               <p style={{ fontSize: "0.9rem", fontWeight: 600, color: "var(--text-secondary)" }}>
                 {isManualCrop ? "Adjust Crop Area" : "Original Image Preview"}
@@ -332,7 +331,7 @@ export default function CompressImageClient() {
             )}
           </div>
 
-          <div className="card" style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+          <div className="card" style={{ display: "flex", flexDirection: "column", gap: "1.25rem", minWidth: 0, overflow: "hidden", maxWidth: "100%" }}>
             <div>
               <label className="input-label" htmlFor="custom-kb">Target Size</label>
               <div className="grid grid-cols-2 gap-2 mb-3 w-full">
