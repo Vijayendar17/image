@@ -90,6 +90,45 @@ export function BreadcrumbSchema({ items }: BreadcrumbSchemaProps) {
   );
 }
 
+interface ArticleSchemaProps {
+  headline: string;
+  authorName: string;
+  authorType?: "Person" | "Organization";
+  publisherName: string;
+  publisherUrl: string;
+  datePublished: string;
+  dateModified: string;
+  description?: string;
+}
+
+export function ArticleSchema({ headline, authorName, authorType = "Organization", publisherName, publisherUrl, datePublished, dateModified, description }: ArticleSchemaProps) {
+  const schema: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": headline,
+    "author": {
+      "@type": authorType,
+      "name": authorName,
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": publisherName,
+      "url": publisherUrl,
+    },
+    "datePublished": datePublished,
+    "dateModified": dateModified,
+  };
+
+  if (description) schema.description = description;
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
 export function WebsiteSchema() {
   const schema = {
     "@context": "https://schema.org",
