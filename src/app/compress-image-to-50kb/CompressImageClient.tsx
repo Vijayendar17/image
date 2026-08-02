@@ -66,8 +66,8 @@ async function compressImage(
         const bw = (manualCrop.width / 100) * containerW;
         const bh = (manualCrop.height / 100) * containerH;
 
-        dw = bw;
-        dh = bh;
+        dw = Math.round(bw);
+        dh = Math.round(bh);
         if (dw > maxWidth || dh > maxHeight) {
           const ratio = Math.min(maxWidth / dw, maxHeight / dh);
           dw = Math.round(dw * ratio);
