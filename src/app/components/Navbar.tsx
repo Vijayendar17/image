@@ -35,6 +35,9 @@ export default function Navbar() {
           <li>
             <Link href="/image-to-pdf" onClick={() => setIsOpen(false)}>Image to PDF</Link>
           </li>
+          <li>
+            <Link href="/blog" onClick={() => setIsOpen(false)}>Blog</Link>
+          </li>
           <li className="nav-cta">
             <Link href="/compress-image-to-50kb" className="btn btn-primary" style={{ padding: "0.5rem 1rem", fontSize: "0.85rem" }} onClick={() => setIsOpen(false)}>
               Try Free →

@@ -26,7 +26,7 @@ export default function ImageCropper({ imageSrc, aspectRatio, onCropChange }: Im
   const [imgAspectRatio, setImgAspectRatio] = useState<string>('4/3');
   const [naturalW, setNaturalW] = useState(800);
   const [naturalH, setNaturalH] = useState(600);
-  const [crop, setCrop] = useState<Crop>({ x: 10, y: 10, width: 80, height: 80 });
+  const [crop, setCrop] = useState<Crop>({ x: 25, y: 25, width: 50, height: 50 });
   const [zoom, setZoom] = useState(1);
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
@@ -50,10 +50,10 @@ export default function ImageCropper({ imageSrc, aspectRatio, onCropChange }: Im
       const ar = naturalW / naturalH;
       const clampedAr = Math.min(Math.max(ar, 0.5), 16 / 9);
       const ratio = aspectRatio / clampedAr;
-      let w = 80;
+      let w = 50;
       let h = w / ratio;
-      if (h > 90) { h = 90; w = h * ratio; }
-      if (w > 90) { w = 90; h = w / ratio; }
+      if (h > 65) { h = 65; w = h * ratio; }
+      if (w > 65) { w = 65; h = w / ratio; }
 
       const newCrop = { x: (100 - w) / 2, y: (100 - h) / 2, width: w, height: h };
       setCrop(newCrop);
@@ -218,7 +218,7 @@ export default function ImageCropper({ imageSrc, aspectRatio, onCropChange }: Im
 
         {imgLoaded && (
           <>
-            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', pointerEvents: 'none' }} />
+            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.3)', pointerEvents: 'none' }} />
             <div
               style={{
                 position: 'absolute',
@@ -226,7 +226,7 @@ export default function ImageCropper({ imageSrc, aspectRatio, onCropChange }: Im
                 left: `${crop.x}%`,
                 width: `${crop.width}%`,
                 height: `${crop.height}%`,
-                boxShadow: '0 0 0 9999px rgba(0,0,0,0.6)',
+                boxShadow: '0 0 0 9999px rgba(0,0,0,0.25)',
                 cursor: 'move',
                 border: '2px solid #fff',
                 zIndex: 10
