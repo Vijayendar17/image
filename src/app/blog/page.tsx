@@ -15,12 +15,12 @@ export const metadata: Metadata = {
 const posts = [
   {
     slug: "how-much-can-you-save-by-using-your-own-cloud-infrastructure",
-    title: "Your Browser Is the Server: How LiteFiles Stays Free and Private",
+    title: "How Much Can You Save by Using Your Own Cloud Infrastructure?",
     description:
-      "LiteFiles compresses images and PDFs entirely in your browser — nothing is uploaded. Here's what that saves, and how it keeps your documents private.",
+      "Compare the cost of a private cloud vs public cloud and see how much businesses can save by running their own infrastructure.",
     date: "2026-08-02",
     category: "Technology",
-    readTime: "6 min read",
+    readTime: "7 min read",
   },
   {
     slug: "how-to-compress-image-to-50kb-for-upsc-ssc-and-government-portal-uploads",
