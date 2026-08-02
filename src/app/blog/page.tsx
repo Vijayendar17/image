@@ -54,7 +54,7 @@ export default function BlogIndex() {
           </div>
         </div>
 
-        <div className="seo-section" style={{ marginTop: '2rem' }}>
+        <div className="seo-section blog-article" style={{ marginTop: '2rem' }}>
           <div style={{ display: 'grid', gap: '1.5rem', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))' }}>
             {posts.map((post) => (
               <Link

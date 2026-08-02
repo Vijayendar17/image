@@ -75,7 +75,7 @@ export default function BlogPost() {
           </div>
         </div>
 
-        <article className="seo-section" style={{ marginTop: '2rem' }}>
+        <article className="seo-section blog-article" style={{ marginTop: '2rem' }}>
           <p>
             Applying for government exams like UPSC, SSC, IBPS, or state-level portals often comes with a frustrating roadblock: strict image size requirements. You might have the perfect passport photo, but the portal rejects it because it&apos;s &quot;larger than 50KB.&quot;
           </p>

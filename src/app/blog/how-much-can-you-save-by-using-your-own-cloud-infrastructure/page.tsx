@@ -69,7 +69,7 @@ export default function BlogPost() {
           </div>
         </div>
 
-        <article className="seo-section" style={{ marginTop: '2rem' }}>
+        <article className="seo-section blog-article" style={{ marginTop: '2rem' }}>
           <p>
             Every image you compress on LiteFiles stays on your own device. That isn&apos;t a marketing line — it&apos;s the literal, technical truth about how this tool works.
           </p>

@@ -898,6 +898,11 @@ input[type="range"]::-webkit-slider-thumb:hover {
   padding: 0 1.5rem 4rem;
 }
 
+.blog-article {
+  max-width: 100%;
+  width: 100%;
+}
+
 .seo-section h2 {
   font-family: var(--font-plus-jakarta-sans), sans-serif;
   font-size: 1.35rem;
