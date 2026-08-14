@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import CompressImageClient from "./CompressImageClient";
+import ToolHero from "../components/ToolHero";
+import FaqAccordion from "../components/FaqAccordion";
+import RelatedTools from "../components/RelatedTools";
 import AdSlot from "../components/AdSlot";
 import { WebAppSchema, FAQSchema, BreadcrumbSchema } from "../components/SchemaMarkup";
 import { siteConfig } from "../config";
@@ -64,14 +66,6 @@ const faqs = [
   },
 ];
 
-const relatedTools = [
-  { href: "/passport-photo-resize", icon: "📷", title: "Passport Photo Resize", desc: "Resize to 35×45mm for VISA, PAN, Aadhaar" },
-  { href: "/resize-signature-to-20kb", icon: "✍️", title: "Signature to 20KB", desc: "Compress signature for SSC, UPSC, IBPS exams" },
-  { href: "/pdf-compressor", icon: "📄", title: "Aadhaar PDF Compressor", desc: "Reduce PDF below 200KB for portal uploads" },
-  { href: "/image-to-pdf", icon: "🖼️", title: "Image to Scanned PDF", desc: "Convert photos to a scanned PDF document" },
-  { href: "/ssc-document-resize", icon: "🏛️", title: "SSC/UPSC Document Resize", desc: "One-click exam-ready photo & signature" },
-];
-
 export default function CompressImagePage() {
   return (
     <>
@@ -88,15 +82,12 @@ export default function CompressImagePage() {
       ]} />
       <Navbar />
       <main className="tool-page">
-        <div className="tool-hero">
-          <div className="tool-hero-inner">
-            <span className="badge badge-orange">🗜️ Image Compressor</span>
-            <h1 className="tool-title">Compress Image to 50KB</h1>
-            <p className="tool-desc">
-              Reduce your JPG or PNG file size to exactly 50KB, 100KB, or any custom size. Used by lakhs of aspirants for SSC, UPSC, IBPS, and government portal uploads.
-            </p>
-          </div>
-        </div>
+        <ToolHero
+          crumb="Compress Image to 50KB"
+          badge={<span className="badge badge-orange">🗜️ Image Compressor</span>}
+          title="Compress Image to 50KB"
+          desc="Reduce your JPG or PNG file size to exactly 50KB, 100KB, or any custom size. Used by lakhs of aspirants for SSC, UPSC, IBPS, and government portal uploads."
+        />
 
         {/* Top Ad Slot (Leaderboard) */}
         <div className="container" style={{ maxWidth: 900 }}>
@@ -141,29 +132,12 @@ export default function CompressImagePage() {
             Even 1KB over the portal&apos;s limit triggers an error and blocks form submission. This is why having a reliable compressor that hits an exact file size — not just &quot;roughly smaller&quot; — is essential for every competitive exam aspirant in India. LiteFiles was built precisely for this use case.
           </p>
 
+          <span className="faq-badge">FAQ</span>
           <h2>Frequently Asked Questions</h2>
-          <div className="faq-section" style={{ margin: 0 }}>
-            {faqs.map((faq) => (
-              <div key={faq.q} className="faq-item">
-                <p className="faq-question">{faq.q}</p>
-                <p className="faq-answer">{faq.a}</p>
-              </div>
-            ))}
-          </div>
+          <FaqAccordion faqs={faqs} />
 
           <h2>Related Tools</h2>
-          <div className="related-tools-grid">
-            {relatedTools.map((tool) => (
-              <Link key={tool.href} href={tool.href} className="related-tool-card">
-                <span className="related-tool-icon">{tool.icon}</span>
-                <div>
-                  <div className="related-tool-title">{tool.title}</div>
-                  <div className="related-tool-desc">{tool.desc}</div>
-                </div>
-              </Link>
-            ))}
-          </div>
-
+          <RelatedTools currentHref="/compress-image-to-50kb" />
         </div>
       </main>
       <Footer />

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { ArticleSchema, BreadcrumbSchema } from "../../components/SchemaMarkup";
@@ -45,7 +46,7 @@ export default function BlogPost() {
         { name: "How Much Can You Save by Using Your Own Cloud Infrastructure?", url: PAGE_URL },
       ]} />
       <Navbar />
-      <main className="tool-page">
+      <main className="tool-page light-page">
         <div className="tool-hero" style={{ padding: '4rem 0 2rem' }}>
           <div className="tool-hero-inner">
             <nav style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.75rem' }}>
@@ -69,6 +70,15 @@ export default function BlogPost() {
         </div>
 
         <article className="seo-section blog-article" style={{ marginTop: '2rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
+            <Image
+              src="https://res.cloudinary.com/dzsjqo68q/image/upload/v1786705356/i3abo23aksgyofrmlmxo.png"
+              alt="Cloud infrastructure savings comparison"
+              width={1577}
+              height={997}
+              style={{ width: '80%', height: 'auto', borderRadius: '12px' }}
+            />
+          </div>
           <p>
             As businesses grow, cloud computing becomes an essential part of their operations. Public cloud platforms offer convenience, scalability, and a wide range of managed services. However, as workloads increase, many organizations begin to notice a significant rise in monthly cloud bills.
           </p>
@@ -186,6 +196,16 @@ export default function BlogPost() {
             Hardware can be tailored to your applications, ensuring better performance for databases, AI workloads, virtualization, or high-performance computing.
           </p>
 
+          <div style={{ display: 'flex', justifyContent: 'center', margin: '2.5rem 0' }}>
+            <Image
+              src="https://res.cloudinary.com/dzsjqo68q/image/upload/v1786705864/iw3d2s23qdxhd1ev6npr.jpg"
+              alt="Benefits of owning cloud infrastructure"
+              width={825}
+              height={917}
+              style={{ width: '80%', height: 'auto', borderRadius: '12px' }}
+            />
+          </div>
+
           <h2>When a Private Cloud Makes Sense</h2>
           <p>A private cloud is often the right choice for organizations that:</p>
           <ul className="step-list">
@@ -198,6 +218,16 @@ export default function BlogPost() {
           <p>
             It may not be ideal for businesses with highly variable workloads or those needing global infrastructure on demand.
           </p>
+
+          <div style={{ display: 'flex', justifyContent: 'center', margin: '2.5rem 0' }}>
+            <Image
+              src="https://res.cloudinary.com/dzsjqo68q/image/upload/v1786705883/cx4jc2qmsrpunobpdpgf.jpg"
+              alt="Running your own cloud infrastructure"
+              width={858}
+              height={917}
+              style={{ width: '80%', height: 'auto', borderRadius: '12px' }}
+            />
+          </div>
 
           <h2>Challenges to Consider</h2>
           <p>Operating your own cloud also comes with responsibilities:</p>

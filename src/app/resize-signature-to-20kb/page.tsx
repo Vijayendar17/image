@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import SignatureClient from "./SignatureClient";
+import ToolHero from "../components/ToolHero";
+import FaqAccordion from "../components/FaqAccordion";
+import RelatedTools from "../components/RelatedTools";
 import { WebAppSchema, FAQSchema, BreadcrumbSchema } from "../components/SchemaMarkup";
 import { siteConfig } from "../config";
 
@@ -45,14 +47,6 @@ const faqs = [
   { q: "My signature background is not white — what should I do?", a: "Use a plain white sheet of paper when signing. If the background is off-white or grey after scanning, increase brightness and contrast before uploading here." },
 ];
 
-const relatedTools = [
-  { href: "/compress-image-to-50kb", icon: "🗜️", title: "Compress Image to 50KB", desc: "Reduce any JPG/PNG to exact KB for portals" },
-  { href: "/passport-photo-resize", icon: "📷", title: "Passport Photo Resize", desc: "Resize to 35x45mm for VISA, PAN, Aadhaar" },
-  { href: "/pdf-compressor", icon: "📄", title: "Aadhaar PDF Compressor", desc: "Reduce Aadhaar PDF below 200KB" },
-  { href: "/image-to-pdf", icon: "🖼️", title: "Image to Scanned PDF", desc: "Convert photos to a scanned PDF document" },
-  { href: "/ssc-document-resize", icon: "🏛️", title: "SSC/UPSC Document Resize", desc: "One-click exam-ready photo & signature" },
-];
-
 export default function SignaturePage() {
   return (
     <>
@@ -67,20 +61,14 @@ export default function SignaturePage() {
         { name: "Home", url: BASE },
         { name: "Signature to 20KB", url: PAGE_URL },
       ]} />
-      <Navbar />
+<Navbar />
       <main className="tool-page">
-        <div className="tool-hero">
-          <div className="tool-hero-inner">
-            <span className="badge badge-blue" style={{ background: "rgba(168,85,247,0.15)", color: "#a855f7", border: "1px solid rgba(168,85,247,0.3)" }}>
-              ✍️ Signature Tool
-            </span>
-            <h1 className="tool-title">Resize Signature to 20KB</h1>
-            <p className="tool-desc">
-              Compress your signature image to exact size specifications for SSC, UPSC, IBPS, SBI, and all major competitive exam portals. One click — done.
-            </p>
-          </div>
-        </div>
-
+        <ToolHero
+          crumb="Signature to 20KB"
+          badge={<span className="badge badge-orange">✍️ Signature Tool</span>}
+          title="Resize Signature to 20KB"
+          desc="Compress your signature image to exact size specifications for SSC, UPSC, IBPS, SBI, and all major competitive exam portals. One click — done."
+        />
         <SignatureClient />
 
         <div className="seo-section">
@@ -112,28 +100,12 @@ export default function SignaturePage() {
             Because every portal has slightly different limits (SSC CGL: max 12KB; IBPS: 10–20KB; UPSC: up to 40KB), aspirants often struggle to get the right size. LiteFiles removes the guesswork by letting you set the exact target KB and delivers a compressed file that passes every portal check.
           </p>
 
+          <span className="faq-badge">FAQ</span>
           <h2>Frequently Asked Questions</h2>
-          <div className="faq-section" style={{ margin: 0 }}>
-            {faqs.map((faq) => (
-              <div key={faq.q} className="faq-item">
-                <p className="faq-question">{faq.q}</p>
-                <p className="faq-answer">{faq.a}</p>
-              </div>
-            ))}
-          </div>
+          <FaqAccordion faqs={faqs} />
 
           <h2>Related Tools</h2>
-          <div className="related-tools-grid">
-            {relatedTools.map((tool) => (
-              <Link key={tool.href} href={tool.href} className="related-tool-card">
-                <span className="related-tool-icon">{tool.icon}</span>
-                <div>
-                  <div className="related-tool-title">{tool.title}</div>
-                  <div className="related-tool-desc">{tool.desc}</div>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <RelatedTools currentHref="/resize-signature-to-20kb" />
         </div>
       </main>
       <Footer />

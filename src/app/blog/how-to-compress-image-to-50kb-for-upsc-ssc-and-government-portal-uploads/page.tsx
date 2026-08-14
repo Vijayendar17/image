@@ -52,7 +52,7 @@ export default function BlogPost() {
         { name: "How to Compress Image to 50KB for UPSC, SSC and Government Portal Uploads (2026 Guide)", url: PAGE_URL },
       ]} />
       <Navbar />
-      <main className="tool-page">
+      <main className="tool-page light-page">
         <div className="tool-hero" style={{ padding: '4rem 0 2rem' }}>
           <div className="tool-hero-inner">
             <nav style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.75rem' }}>
@@ -97,10 +97,10 @@ export default function BlogPost() {
           </ul>
 
           <h2>Step-by-Step Guide: How to Compress Your Image to 50KB</h2>
-          <p>You don&apos;t need Photoshop or any paid software. You can do this right from your phone or laptop using <Link href="/compress-image-to-50kb" style={{ color: 'var(--accent-blue)', textDecoration: 'underline' }}>LiteFiles&apos;s Image Compressor</Link>.</p>
+          <p>You don&apos;t need Photoshop or any paid software. You can do this right from your phone or laptop using <Link href="/compress-image-to-50kb" style={{ color: 'var(--accent-orange)', textDecoration: 'underline' }}>LiteFiles&apos;s Image Compressor</Link>.</p>
           
           <ul className="step-list">
-            <li><strong>Step 1: Open the Compressor Tool.</strong> Go to the <Link href="/compress-image-to-50kb" style={{ color: 'var(--accent-blue)', textDecoration: 'underline' }}>Compress Image to 50KB</Link> tool on LiteFiles.</li>
+            <li><strong>Step 1: Open the Compressor Tool.</strong> Go to the <Link href="/compress-image-to-50kb" style={{ color: 'var(--accent-orange)', textDecoration: 'underline' }}>Compress Image to 50KB</Link> tool on LiteFiles.</li>
             <li><strong>Step 2: Upload Your Photo.</strong> Click on the upload box or drag and drop your passport photo directly into the browser.</li>
             <li><strong>Step 3: Set Target Size.</strong> Use the slider to set your target size exactly to 50KB (or 20KB if you are uploading a signature).</li>
             <li><strong>Step 4: Download.</strong> Click the &apos;Compress&apos; button. The tool will instantly reduce the file size while maintaining clarity, ready for download!</li>
@@ -109,12 +109,12 @@ export default function BlogPost() {
           <h2>Pro Tips for the Best Results</h2>
           <p>
             <strong>Lighting matters:</strong> Take your photo in natural daylight against a plain white or light blue background. This reduces visual noise, allowing better compression.<br/><br/>
-            <strong>Crop before compressing:</strong> Use the <Link href="/passport-photo-resize" style={{ color: 'var(--accent-blue)', textDecoration: 'underline' }}>Passport Photo Resize</Link> tool first to crop out unnecessary background. A tightly cropped photo looks clearer even at 50KB.
+            <strong>Crop before compressing:</strong> Use the <Link href="/passport-photo-resize" style={{ color: 'var(--accent-orange)', textDecoration: 'underline' }}>Passport Photo Resize</Link> tool first to crop out unnecessary background. A tightly cropped photo looks clearer even at 50KB.
           </p>
 
           <h2>Need to Resize Documents or PDFs?</h2>
           <p>
-            If the portal asks for Aadhaar cards or certificates in PDF format under 1MB or 200KB, use our <Link href="/pdf-compressor" style={{ color: 'var(--accent-blue)', textDecoration: 'underline' }}>Aadhaar PDF Compressor</Link>. It ensures your text remains readable while shrinking the file size drastically.
+            If the portal asks for Aadhaar cards or certificates in PDF format under 1MB or 200KB, use our <Link href="/pdf-compressor" style={{ color: 'var(--accent-orange)', textDecoration: 'underline' }}>Aadhaar PDF Compressor</Link>. It ensures your text remains readable while shrinking the file size drastically.
           </p>
 
           <div style={{ marginTop: '3rem', marginBottom: '2rem' }}>

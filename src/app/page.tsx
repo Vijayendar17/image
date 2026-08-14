@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Reveal from "./components/Reveal";
+import CountUp from "./components/CountUp";
 import { WebsiteSchema } from "./components/SchemaMarkup";
+import { tools } from "./tools-data";
+import { posts, formatDate } from "./blog-data";
 
 export const metadata: Metadata = {
   title: "LiteFiles | Free Image & PDF Tools Online",
@@ -10,68 +14,26 @@ export const metadata: Metadata = {
     "LiteFiles offers free online tools for image compression, PDF conversion, resizing, and document utilities.",
 };
 
-const tools = [
-  {
-    href: "/compress-image-to-50kb",
-    icon: "🗜️",
-    title: "Compress Image to 50KB",
-    desc: "Reduce JPG/PNG size instantly. Perfect for government form uploads, admit cards, and online applications.",
-    tag: "Most Popular",
-    iconBg: "rgba(255,107,53,0.12)",
-    accent: "linear-gradient(90deg, #ff6b35, #ff9a5c)",
-  },
-  {
-    href: "/passport-photo-resize",
-    icon: "📷",
-    title: "Passport Photo Resize",
-    desc: "Resize passport photo to 35×45mm or any standard size. Compress under 50KB for VISA, PAN, Aadhaar applications.",
-    tag: "Govt Forms",
-    iconBg: "rgba(79,142,247,0.12)",
-    accent: "linear-gradient(90deg, #4f8ef7, #7eb0ff)",
-  },
-  {
-    href: "/resize-signature-to-20kb",
-    icon: "✍️",
-    title: "Signature to 20KB",
-    desc: "Resize and compress your signature image to under 20KB. Required for SSC, UPSC, bank exams and most job portals.",
-    tag: "Exam Portals",
-    iconBg: "rgba(168,85,247,0.12)",
-    accent: "linear-gradient(90deg, #a855f7, #c084fc)",
-  },
-  {
-    href: "/pdf-compressor",
-    icon: "📄",
-    title: "Aadhaar PDF Compressor",
-    desc: "Compress Aadhaar, marksheets, and certificates below 200KB or 1MB for online portal uploads.",
-    tag: "PDF",
-    iconBg: "rgba(34,197,94,0.12)",
-    accent: "linear-gradient(90deg, #22c55e, #4ade80)",
-  },
-  {
-    href: "/image-to-pdf",
-    icon: "🖼️",
-    title: "Image to Scanned PDF",
-    desc: "Convert JPG/PNG photos to a professional-looking scanned PDF. Great for document submissions.",
-    tag: "Convert",
-    iconBg: "rgba(234,179,8,0.12)",
-    accent: "linear-gradient(90deg, #eab308, #facc15)",
-  },
-  {
-    href: "/ssc-document-resize",
-    icon: "🏛️",
-    title: "SSC / UPSC Document Resize",
-    desc: "Resize photos and signatures to exact SSC, UPSC, IBPS, SBI specifications in one click.",
-    tag: "Competitive Exams",
-    iconBg: "rgba(239,68,68,0.12)",
-    accent: "linear-gradient(90deg, #ef4444, #f87171)",
-  },
+const stats = [
+  { end: 10000, suffix: "+", label: "Files Compressed" },
+  { end: 100, suffix: "%", label: "Free Forever" },
+  { end: 6, suffix: "+", label: "Tools Available" },
+  { end: 0, suffix: "", label: "Signup Required" },
 ];
 
-const stats = [
-  { value: "100%", label: "Free Forever" },
-  { value: "0", label: "Signups Required" },
-  { value: "In Browser", label: "Privacy-First" },
-  { value: "🇮🇳", label: "Made for India" },
+const steps = [
+  {
+    title: "Upload",
+    desc: "Drop your image or PDF into the tool. No registration, nothing to install.",
+  },
+  {
+    title: "Set Size",
+    desc: "Choose your target file size in KB or pick a ready preset for your portal.",
+  },
+  {
+    title: "Download",
+    desc: "Get your compressed file instantly. All processing stays in your browser.",
+  },
 ];
 
 export default function HomePage() {
@@ -80,141 +42,200 @@ export default function HomePage() {
       <WebsiteSchema />
       <Navbar />
       <main>
-        {/* Hero */}
+        {/* ===== Hero ===== */}
         <section className="hero">
           <div className="container">
-            <p className="hero-eyebrow">🇮🇳 Designed for Indian Government Portals</p>
-            <h1 className="hero-title">
-              LiteFiles – Free Online File Tools
-            </h1>
-            <p className="hero-subtitle">
-              Compress images to 50KB, resize passport photos, reduce PDF size — everything you need for SSC, UPSC, bank exam, and job application portals. Works instantly. No signup.
-            </p>
-            <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-              <Link href="/compress-image-to-50kb" className="btn btn-primary btn-lg">
-                🗜️ Compress Image to 50KB
-              </Link>
-              <Link href="/passport-photo-resize" className="btn btn-secondary btn-lg">
-                📷 Resize Passport Photo
-              </Link>
-            </div>
-
-            {/* Trust bar */}
-            <div className="trust-bar">
-              {stats.map((s) => (
-                <div key={s.label} className="trust-item">
-                  <span className="icon">✓</span>
-                  <strong style={{ color: "var(--text-primary)" }}>{s.value}</strong>
-                  <span>{s.label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Tools Grid */}
-        <section style={{ padding: "3rem 0" }}>
-          <div className="container">
-            <div style={{ textAlign: "center", marginBottom: "0.75rem" }}>
-              <span className="badge badge-orange">All Tools</span>
-            </div>
-            <h2 className="section-title" style={{ textAlign: "center" }}>
-              Pick Your Tool
-            </h2>
-            <p style={{ textAlign: "center", color: "var(--text-secondary)", marginTop: "0.75rem", marginBottom: "2rem" }}>
-              All tools run entirely in your browser. Your files never leave your device.
-            </p>
-            <div className="tools-grid">
-              {tools.map((tool) => (
-                <Link
-                  key={tool.href}
-                  href={tool.href}
-                  className="tool-card"
-                  style={{ "--card-accent": tool.accent } as React.CSSProperties}
-                >
-                  <div className="tool-card-icon" style={{ background: tool.iconBg }}>
-                    {tool.icon}
-                  </div>
-                  <h3 className="tool-card-title">{tool.title}</h3>
-                  <p className="tool-card-desc">{tool.desc}</p>
-                  <span className="tool-card-tag">{tool.tag}</span>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* How it works */}
-        <section className="how-it-works">
-          <div className="container">
-            <div style={{ textAlign: "center" }}>
-              <span className="badge badge-blue">Simple Process</span>
-              <h2 className="section-title" style={{ textAlign: "center", marginTop: "0.75rem" }}>
-                Ready in 3 Steps
-              </h2>
-            </div>
-            <div className="steps-grid">
-              {[
-                { n: "1", title: "Upload Your File", desc: "Drag & drop or click to select your image or PDF. Supports JPG, PNG, PDF." },
-                { n: "2", title: "Set Your Target", desc: "Choose your target size (50KB, 20KB) or select a preset for your exam portal." },
-                { n: "3", title: "Download Instantly", desc: "Click compress and download your optimized file. No watermarks, no email required." },
-              ].map((step) => (
-                <div key={step.n} className="step-item">
-                  <div className="step-number">{step.n}</div>
-                  <h3 className="step-title">{step.title}</h3>
-                  <p className="step-desc">{step.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Why choose us */}
-        <section style={{ padding: "4rem 0", borderTop: "1px solid var(--border)" }}>
-          <div className="container">
-            <div style={{ textAlign: "center", marginBottom: "2.5rem" }}>
-              <span className="badge badge-green">Why LiteFiles?</span>
-              <h2 className="section-title" style={{ textAlign: "center", marginTop: "0.75rem" }}>
-                Built for Indian Job Seekers
-              </h2>
-            </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "1.25rem" }}>
-              {[
-                { icon: "🔒", title: "100% Private", desc: "Your files never leave your browser. We run everything client-side — zero server uploads." },
-                { icon: "⚡", title: "Blazing Fast", desc: "No queues, no wait time. Compression happens instantly using browser-native APIs." },
-                { icon: "📐", title: "Exam-Ready Presets", desc: "Pre-configured for SSC, UPSC, IBPS, SBI PO, and other major competitive exam portals." },
-                { icon: "💸", title: "Completely Free", desc: "No hidden charges, no premium tier. Every tool is free, forever." },
-              ].map((f) => (
-                <div key={f.title} className="card">
-                  <div style={{ fontSize: "2rem", marginBottom: "0.75rem" }}>{f.icon}</div>
-                  <h3 style={{ fontWeight: 700, marginBottom: "0.5rem" }}>{f.title}</h3>
-                  <p style={{ color: "var(--text-secondary)", fontSize: "0.875rem", lineHeight: "1.7" }}>{f.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* CTA */}
-        <section style={{ padding: "4rem 0", textAlign: "center" }}>
-          <div className="container">
-            <div style={{
-              background: "linear-gradient(135deg, rgba(79,142,247,0.08), rgba(255,107,53,0.06))",
-              border: "1px solid var(--border-light)",
-              borderRadius: "24px",
-              padding: "3rem 2rem",
-            }}>
-              <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "2rem", fontWeight: 800, marginBottom: "1rem" }}>
-                Ready to compress your document?
-              </h2>
-              <p style={{ color: "var(--text-secondary)", marginBottom: "2rem" }}>
-                Pick a tool and get your file ready in under 30 seconds. No account needed.
+            <div className="hero-content">
+              <span className="hero-badge">Free Tools for Indian Students &amp; Professionals</span>
+              <h1 className="hero-title">
+                Compress, Resize &amp; <span className="hero-accent">Convert</span> Files Instantly
+              </h1>
+              <p className="hero-subtitle">
+                Free online tools for UPSC, SSC, IBPS and government portal uploads. No signup required.
               </p>
-              <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-                <Link href="/compress-image-to-50kb" className="btn btn-primary btn-lg">Start Compressing →</Link>
-                <Link href="/passport-photo-resize" className="btn btn-secondary btn-lg">Resize Passport Photo</Link>
+              <div className="hero-ctas">
+                <Link href="/compress-image-to-50kb" className="btn btn-primary btn-xl">
+                  Compress Image Now
+                </Link>
+                <Link href="#tools" className="btn btn-outline btn-xl">
+                  View All Tools
+                </Link>
+              </div>
+              <div className="hero-trust">
+                <span><i>✓</i>100% Free</span>
+                <span><i>✓</i>No Signup</span>
+                <span><i>✓</i>Works on Mobile</span>
+                <span><i>✓</i>Instant Download</span>
               </div>
             </div>
+
+            {/* Hero visual — mockup of the compress tool */}
+            <div className="hero-visual">
+              <div className="hero-visual-glow" />
+              <div className="mock-window">
+                <div className="mock-chrome">
+                  <span className="mock-dot" />
+                  <span className="mock-dot" />
+                  <span className="mock-dot" />
+                  <span className="mock-chrome-url">litefiles.com/compress-image-to-50kb</span>
+                </div>
+                <div className="mock-body">
+                  <div className="mock-upload">
+                    <span className="mock-upload-icon">🖼️</span>
+                    <p className="mock-upload-text">Drop your image here</p>
+                    <span className="mock-upload-sub">JPG, PNG · up to 20MB · stays in your browser</span>
+                  </div>
+                  <div className="mock-settings">
+                    <div className="mock-preset-row">
+                      <span className="mock-preset">20 KB</span>
+                      <span className="mock-preset mock-preset-active">50 KB</span>
+                      <span className="mock-preset">100 KB</span>
+                    </div>
+                    <div>
+                      <div className="mock-progress">
+                        <div className="mock-progress-fill" />
+                      </div>
+                      <p style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginTop: "0.35rem" }}>
+                        Compressing… 72%
+                      </p>
+                    </div>
+                    <div className="mock-result-row">
+                      <span style={{ fontSize: "0.85rem", color: "var(--text-secondary)" }}>2.4 MB → 49 KB</span>
+                      <span className="mock-result-size">✓ Done</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ===== Tools ===== */}
+        <section id="tools" className="tools-section section">
+          <div className="container">
+            <Reveal>
+              <div className="tools-header">
+                <span className="section-label">Our Tools</span>
+                <h2 className="section-title">Everything You Need</h2>
+                <p className="section-sub">Professional tools for documents, images and PDFs</p>
+              </div>
+            </Reveal>
+
+            <div className="tools-grid">
+              {tools.map((tool, i) => (
+                <Reveal key={tool.href} delay={i * 80}>
+                  <Link href={tool.href} className="tool-card">
+                    <span className="tool-card-icon">{tool.icon}</span>
+                    <h3 className="tool-card-title">{tool.title}</h3>
+                    <p className="tool-card-desc">{tool.desc}</p>
+                    <span className="tool-card-link">
+                      Use Tool
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                      </svg>
+                    </span>
+                  </Link>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== Stats / Trust ===== */}
+        <section className="stats-section">
+          <div className="container">
+            <div className="stats-grid">
+              {stats.map((s, i) => (
+                <Reveal key={s.label} delay={i * 100}>
+                  <div className="stat-cell">
+                    <div className="stat-number">
+                      <CountUp end={s.end} suffix={s.suffix} />
+                    </div>
+                    <div className="stat-label">{s.label}</div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== How it works ===== */}
+        <section className="how-section section">
+          <div className="container">
+            <Reveal>
+              <div className="tools-header">
+                <span className="section-label">How It Works</span>
+                <h2 className="section-title">Ready in 3 Simple Steps</h2>
+                <p className="section-sub">No downloads, no account, no waiting. Just results.</p>
+              </div>
+            </Reveal>
+
+            <div className="steps-grid">
+              {steps.map((step, i) => (
+                <Reveal key={step.title} delay={i * 120}>
+                  <div className="step-item">
+                    <div className="step-number">{i + 1}</div>
+                    <h3 className="step-title">{step.title}</h3>
+                    <p className="step-desc">{step.desc}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== Blog ===== */}
+        <section className="blog-section section">
+          <div className="container">
+            <Reveal>
+              <div className="tools-header">
+                <span className="section-label">From the Blog</span>
+                <h2 className="section-title">Guides &amp; How-Tos</h2>
+                <p className="section-sub">Practical tips for compressing files and acing your online submissions.</p>
+              </div>
+            </Reveal>
+
+            <div className="blog-grid">
+              {posts.map((post, i) => (
+                <Reveal key={post.slug} delay={i * 100}>
+                  <Link href={`/blog/${post.slug}`} className="blog-card">
+                    <span className="blog-card-cat">{post.category}</span>
+                    <h3 className="blog-card-title">{post.title}</h3>
+                    <p className="blog-card-excerpt">{post.description}</p>
+                    <span className="blog-card-meta">{formatDate(post.date)} · {post.readTime}</span>
+                    <span className="blog-card-more">
+                      Read More
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                      </svg>
+                    </span>
+                  </Link>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== CTA ===== */}
+        <section className="cta-section section">
+          <div className="container">
+            <Reveal>
+              <div className="cta-box">
+                <span className="section-label">Get Started</span>
+                <h2 className="section-title">Ready to Compress Your Document?</h2>
+                <p className="section-sub">
+                  Pick a tool and get your file ready in under 30 seconds. No account needed.
+                </p>
+                <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+                  <Link href="/compress-image-to-50kb" className="btn btn-primary btn-xl">
+                    Start Compressing
+                  </Link>
+                  <Link href="/passport-photo-resize" className="btn btn-outline btn-xl">
+                    Resize Passport Photo
+                  </Link>
+                </div>
+              </div>
+            </Reveal>
           </div>
         </section>
       </main>

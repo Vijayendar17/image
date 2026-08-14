@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import PassportPhotoClient from "./PassportPhotoClient";
+import ToolHero from "../components/ToolHero";
+import FaqAccordion from "../components/FaqAccordion";
+import RelatedTools from "../components/RelatedTools";
 import { WebAppSchema, FAQSchema, BreadcrumbSchema } from "../components/SchemaMarkup";
 import { siteConfig } from "../config";
 
@@ -44,14 +46,6 @@ const faqs = [
   { q: "Can I crop and resize my photo to the correct dimensions here?", a: "Yes. Upload your photo, select the preset (e.g., Indian Passport 35x45mm), crop to fit the face correctly, then compress to the required KB — all in one tool." },
 ];
 
-const relatedTools = [
-  { href: "/compress-image-to-50kb", icon: "🗜️", title: "Compress Image to 50KB", desc: "Reduce any JPG/PNG to exact KB for portals" },
-  { href: "/resize-signature-to-20kb", icon: "✍️", title: "Signature to 20KB", desc: "Compress signature for SSC, UPSC, IBPS" },
-  { href: "/pdf-compressor", icon: "📄", title: "Aadhaar PDF Compressor", desc: "Reduce Aadhaar PDF below 200KB" },
-  { href: "/image-to-pdf", icon: "🖼️", title: "Image to Scanned PDF", desc: "Convert photos to a scanned PDF document" },
-  { href: "/ssc-document-resize", icon: "🏛️", title: "SSC/UPSC Document Resize", desc: "One-click exam-ready photo & signature" },
-];
-
 export default function PassportPhotoPage() {
   return (
     <>
@@ -68,15 +62,12 @@ export default function PassportPhotoPage() {
       ]} />
       <Navbar />
       <main className="tool-page">
-        <div className="tool-hero">
-          <div className="tool-hero-inner">
-            <span className="badge badge-blue">📷 Passport Photo</span>
-            <h1 className="tool-title">Passport Photo Resize &amp; Compress</h1>
-            <p className="tool-desc">
-              Resize your photo to standard passport dimensions (35x45mm, 51x51mm) and compress below 50KB. Accepted by Indian VISA, PAN card, Aadhaar, and all major exam portals.
-            </p>
-          </div>
-        </div>
+        <ToolHero
+          crumb="Passport Photo Resize"
+          badge={<span className="badge badge-orange">📷 Passport Photo</span>}
+          title="Passport Photo Resize &amp; Compress"
+          desc="Resize your photo to standard passport dimensions (35x45mm, 51x51mm) and compress below 50KB. Accepted by Indian VISA, PAN card, Aadhaar, and all major exam portals."
+        />
 
         <PassportPhotoClient />
 
@@ -109,28 +100,12 @@ export default function PassportPhotoPage() {
             A photo even 1KB over the limit causes a portal rejection error. Our tool targets the exact file size you specify, so you never face a &quot;file too large&quot; error before an important application deadline.
           </p>
 
+          <span className="faq-badge">FAQ</span>
           <h2>Frequently Asked Questions</h2>
-          <div className="faq-section" style={{ margin: 0 }}>
-            {faqs.map((faq) => (
-              <div key={faq.q} className="faq-item">
-                <p className="faq-question">{faq.q}</p>
-                <p className="faq-answer">{faq.a}</p>
-              </div>
-            ))}
-          </div>
+          <FaqAccordion faqs={faqs} />
 
           <h2>Related Tools</h2>
-          <div className="related-tools-grid">
-            {relatedTools.map((tool) => (
-              <Link key={tool.href} href={tool.href} className="related-tool-card">
-                <span className="related-tool-icon">{tool.icon}</span>
-                <div>
-                  <div className="related-tool-title">{tool.title}</div>
-                  <div className="related-tool-desc">{tool.desc}</div>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <RelatedTools currentHref="/passport-photo-resize" />
         </div>
       </main>
       <Footer />

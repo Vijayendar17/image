@@ -3,6 +3,9 @@ import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ImageToPdfClient from "./ImageToPdfClient";
+import ToolHero from "../components/ToolHero";
+import FaqAccordion from "../components/FaqAccordion";
+import RelatedTools from "../components/RelatedTools";
 import { WebAppSchema, FAQSchema, BreadcrumbSchema } from "../components/SchemaMarkup";
 import { siteConfig } from "../config";
 
@@ -44,14 +47,6 @@ const faqs = [
   { q: "Can I convert multiple pages of an Aadhaar card to one PDF?", a: "Yes. Photograph or scan each page of your Aadhaar separately, then upload both images here. They will be merged into a single two-page PDF ready for portal upload." },
 ];
 
-const relatedTools = [
-  { href: "/compress-image-to-50kb", icon: "🗜️", title: "Compress Image to 50KB", desc: "Reduce any JPG/PNG to exact KB for portals" },
-  { href: "/passport-photo-resize", icon: "📷", title: "Passport Photo Resize", desc: "Resize to 35x45mm for VISA, PAN, Aadhaar" },
-  { href: "/resize-signature-to-20kb", icon: "✍️", title: "Signature to 20KB", desc: "Compress signature for SSC, UPSC, IBPS" },
-  { href: "/pdf-compressor", icon: "📄", title: "Aadhaar PDF Compressor", desc: "Reduce Aadhaar PDF below 200KB" },
-  { href: "/ssc-document-resize", icon: "🏛️", title: "SSC/UPSC Document Resize", desc: "One-click exam-ready photo & signature" },
-];
-
 export default function ImageToPdfPage() {
   return (
     <>
@@ -66,20 +61,14 @@ export default function ImageToPdfPage() {
         { name: "Home", url: BASE },
         { name: "Image to Scanned PDF", url: PAGE_URL },
       ]} />
-      <Navbar />
+<Navbar />
       <main className="tool-page">
-        <div className="tool-hero">
-          <div className="tool-hero-inner">
-            <span className="badge badge-blue" style={{ background: "rgba(234,179,8,0.15)", color: "#eab308", border: "1px solid rgba(234,179,8,0.3)" }}>
-              🖼️ Image to PDF
-            </span>
-            <h1 className="tool-title">Image to Scanned PDF Converter</h1>
-            <p className="tool-desc">
-              Convert your JPG or PNG photos into a professional PDF instantly. Combine multiple images into one PDF. Perfect for government portal document submissions.
-            </p>
-          </div>
-        </div>
-
+        <ToolHero
+          crumb="Image to Scanned PDF"
+          badge={<span className="badge badge-orange">🖼️ Image to PDF</span>}
+          title="Image to Scanned PDF Converter"
+          desc="Convert your JPG or PNG photos into a professional PDF instantly. Combine multiple images into one PDF. Perfect for government portal document submissions."
+        />
         <ImageToPdfClient />
 
         <div className="seo-section">
@@ -111,28 +100,12 @@ export default function ImageToPdfPage() {
             A raw photograph taken on a smartphone can easily be 3MB to 8MB — far beyond what any portal accepts. Converting to PDF with LiteFiles reduces file size automatically, and you can further compress the output using our <Link href="/pdf-compressor" style={{ color: "var(--accent-orange)", textDecoration: "none", fontWeight: 600 }}>Aadhaar PDF Compressor</Link> if needed.
           </p>
 
+          <span className="faq-badge">FAQ</span>
           <h2>Frequently Asked Questions</h2>
-          <div className="faq-section" style={{ margin: 0 }}>
-            {faqs.map((faq) => (
-              <div key={faq.q} className="faq-item">
-                <p className="faq-question">{faq.q}</p>
-                <p className="faq-answer">{faq.a}</p>
-              </div>
-            ))}
-          </div>
+          <FaqAccordion faqs={faqs} />
 
           <h2>Related Tools</h2>
-          <div className="related-tools-grid">
-            {relatedTools.map((tool) => (
-              <Link key={tool.href} href={tool.href} className="related-tool-card">
-                <span className="related-tool-icon">{tool.icon}</span>
-                <div>
-                  <div className="related-tool-title">{tool.title}</div>
-                  <div className="related-tool-desc">{tool.desc}</div>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <RelatedTools currentHref="/image-to-pdf" />
         </div>
       </main>
       <Footer />

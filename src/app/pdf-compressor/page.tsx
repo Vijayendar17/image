@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import PdfCompressorClient from "./PdfCompressorClient";
+import ToolHero from "../components/ToolHero";
+import FaqAccordion from "../components/FaqAccordion";
+import RelatedTools from "../components/RelatedTools";
 import { WebAppSchema, FAQSchema, BreadcrumbSchema } from "../components/SchemaMarkup";
 import { siteConfig } from "../config";
 
@@ -44,14 +46,6 @@ const faqs = [
   { q: "Can I compress multiple PDFs at once?", a: "Currently LiteFiles compresses one PDF at a time. Simply compress each document individually — the process takes only a few seconds per file." },
 ];
 
-const relatedTools = [
-  { href: "/compress-image-to-50kb", icon: "🗜️", title: "Compress Image to 50KB", desc: "Reduce any JPG/PNG to exact KB for portals" },
-  { href: "/passport-photo-resize", icon: "📷", title: "Passport Photo Resize", desc: "Resize to 35x45mm for VISA, PAN, Aadhaar" },
-  { href: "/resize-signature-to-20kb", icon: "✍️", title: "Signature to 20KB", desc: "Compress signature for SSC, UPSC, IBPS" },
-  { href: "/image-to-pdf", icon: "🖼️", title: "Image to Scanned PDF", desc: "Convert photos to a scanned PDF document" },
-  { href: "/ssc-document-resize", icon: "🏛️", title: "SSC/UPSC Document Resize", desc: "One-click exam-ready photo & signature" },
-];
-
 export default function PdfCompressorPage() {
   return (
     <>
@@ -66,18 +60,14 @@ export default function PdfCompressorPage() {
         { name: "Home", url: BASE },
         { name: "PDF Compressor", url: PAGE_URL },
       ]} />
-      <Navbar />
+<Navbar />
       <main className="tool-page">
-        <div className="tool-hero">
-          <div className="tool-hero-inner">
-            <span className="badge badge-green">📄 PDF Tool</span>
-            <h1 className="tool-title">Aadhaar PDF Compressor</h1>
-            <p className="tool-desc">
-              Reduce your Aadhaar card PDF, marksheet, or certificate below 200KB, 500KB, or 1MB for online portal uploads. Fast, free, and 100% private.
-            </p>
-          </div>
-        </div>
-
+        <ToolHero
+          crumb="PDF Compressor"
+          badge={<span className="badge badge-orange">📄 PDF Tool</span>}
+          title="Aadhaar PDF Compressor"
+          desc="Reduce your Aadhaar card PDF, marksheet, or certificate below 200KB, 500KB, or 1MB for online portal uploads. Fast, free, and 100% private."
+        />
         <PdfCompressorClient />
 
         <div className="seo-section">
@@ -109,28 +99,12 @@ export default function PdfCompressorPage() {
             Aadhaar PDFs from UIDAI are often encrypted and large. Marksheets scanned at high DPI can be several MB. Our PDF compressor strips unnecessary metadata and re-encodes document content to hit your exact target — so your form submission goes through on the first try.
           </p>
 
+          <span className="faq-badge">FAQ</span>
           <h2>Frequently Asked Questions</h2>
-          <div className="faq-section" style={{ margin: 0 }}>
-            {faqs.map((faq) => (
-              <div key={faq.q} className="faq-item">
-                <p className="faq-question">{faq.q}</p>
-                <p className="faq-answer">{faq.a}</p>
-              </div>
-            ))}
-          </div>
+          <FaqAccordion faqs={faqs} />
 
           <h2>Related Tools</h2>
-          <div className="related-tools-grid">
-            {relatedTools.map((tool) => (
-              <Link key={tool.href} href={tool.href} className="related-tool-card">
-                <span className="related-tool-icon">{tool.icon}</span>
-                <div>
-                  <div className="related-tool-title">{tool.title}</div>
-                  <div className="related-tool-desc">{tool.desc}</div>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <RelatedTools currentHref="/pdf-compressor" />
         </div>
       </main>
       <Footer />

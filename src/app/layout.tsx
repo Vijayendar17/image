@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import { Inter, Geist } from "next/font/google";
 import "./globals.css";
 
 import { siteConfig } from "./config";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-plus-jakarta-sans" });
+const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.baseUrl),
@@ -63,12 +63,12 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${plusJakartaSans.variable}`}>
+    <html lang="en" className={`${inter.variable} ${geist.variable}`}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* PWA */}
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#ff6b35" />
+        <meta name="theme-color" content="#000000" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -82,12 +82,13 @@ export default function RootLayout({
           position: "fixed",
           top: 0, left: 0, right: 0,
           zIndex: 9999,
-          background: "#ff6b35",
-          color: "white",
+          background: "#111111",
+          color: "rgba(255,255,255,0.9)",
           textAlign: "center",
           padding: "0.5rem 1rem",
           fontSize: "0.875rem",
           fontWeight: 600,
+          borderBottom: "1px solid rgba(255,255,255,0.1)",
         }}>
           📶 You&apos;re offline — but this tool still works! All processing runs in your browser.
         </div>

@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import SscDocClient from "./SscDocClient";
+import ToolHero from "../components/ToolHero";
+import FaqAccordion from "../components/FaqAccordion";
+import RelatedTools from "../components/RelatedTools";
 import { WebAppSchema, FAQSchema, BreadcrumbSchema } from "../components/SchemaMarkup";
 import { siteConfig } from "../config";
 
@@ -44,14 +46,6 @@ const faqs = [
   { q: "How do I know if my resized file meets the portal's requirements?", a: "After resizing, the tool displays the final pixel dimensions and file size. Compare these against your exam's requirements shown in the specifications table on this page." },
 ];
 
-const relatedTools = [
-  { href: "/compress-image-to-50kb", icon: "🗜️", title: "Compress Image to 50KB", desc: "Reduce any JPG/PNG to exact KB for portals" },
-  { href: "/passport-photo-resize", icon: "📷", title: "Passport Photo Resize", desc: "Resize to 35x45mm for VISA, PAN, Aadhaar" },
-  { href: "/resize-signature-to-20kb", icon: "✍️", title: "Signature to 20KB", desc: "Compress signature for SSC, UPSC, IBPS" },
-  { href: "/pdf-compressor", icon: "📄", title: "Aadhaar PDF Compressor", desc: "Reduce Aadhaar PDF below 200KB" },
-  { href: "/image-to-pdf", icon: "🖼️", title: "Image to Scanned PDF", desc: "Convert photos to a scanned PDF document" },
-];
-
 export default function SscDocPage() {
   return (
     <>
@@ -66,20 +60,14 @@ export default function SscDocPage() {
         { name: "Home", url: BASE },
         { name: "SSC / UPSC Document Resize", url: PAGE_URL },
       ]} />
-      <Navbar />
+<Navbar />
       <main className="tool-page">
-        <div className="tool-hero">
-          <div className="tool-hero-inner">
-            <span className="badge badge-blue" style={{ background: "rgba(239,68,68,0.15)", color: "#ef4444", border: "1px solid rgba(239,68,68,0.3)" }}>
-              🏛️ Exam Portals
-            </span>
-            <h1 className="tool-title">SSC / UPSC Document Resize</h1>
-            <p className="tool-desc">
-              Resize your photo and signature to exact specifications for SSC CGL, UPSC, IBPS PO, SBI Clerk, RRB NTPC, and all major competitive exam portals. One-click, no guesswork.
-            </p>
-          </div>
-        </div>
-
+        <ToolHero
+          crumb="SSC / UPSC Document Resize"
+          badge={<span className="badge badge-orange">🏛️ Exam Portals</span>}
+          title="SSC / UPSC Document Resize"
+          desc="Resize your photo and signature to exact specifications for SSC CGL, UPSC, IBPS PO, SBI Clerk, RRB NTPC, and all major competitive exam portals. One-click, no guesswork."
+        />
         <SscDocClient />
 
         <div className="seo-section">
@@ -140,28 +128,12 @@ export default function SscDocPage() {
             </table>
           </div>
 
+          <span className="faq-badge">FAQ</span>
           <h2>Frequently Asked Questions</h2>
-          <div className="faq-section" style={{ margin: 0 }}>
-            {faqs.map((faq) => (
-              <div key={faq.q} className="faq-item">
-                <p className="faq-question">{faq.q}</p>
-                <p className="faq-answer">{faq.a}</p>
-              </div>
-            ))}
-          </div>
+          <FaqAccordion faqs={faqs} />
 
           <h2>Related Tools</h2>
-          <div className="related-tools-grid">
-            {relatedTools.map((tool) => (
-              <Link key={tool.href} href={tool.href} className="related-tool-card">
-                <span className="related-tool-icon">{tool.icon}</span>
-                <div>
-                  <div className="related-tool-title">{tool.title}</div>
-                  <div className="related-tool-desc">{tool.desc}</div>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <RelatedTools currentHref="/ssc-document-resize" />
         </div>
       </main>
       <Footer />
