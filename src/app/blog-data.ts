@@ -26,6 +26,15 @@ export const posts: BlogPost[] = [
     category: "Technology",
     readTime: "7 min read",
   },
+  {
+    slug: "how-secure-is-your-businesss-cloud-storage-really",
+    title: "How Secure Is Your Business's Cloud Storage, Really?",
+    description:
+      "Most businesses assume their cloud provider handles security. Cloud security is a shared responsibility — here are the ten things you should actually check.",
+    date: "2026-08-17",
+    category: "Technology",
+    readTime: "8 min read",
+  },
 ];
 
 export function formatDate(date: string): string {
