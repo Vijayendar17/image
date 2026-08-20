@@ -1368,6 +1368,47 @@ input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
   justify-content: center;
 }
 
+/* Blog tables */
+.seo-section table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+}
+
+.seo-section thead th {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-weight: 700;
+  text-align: left;
+  padding: 0.85rem 1rem;
+  border-bottom: 2px solid var(--accent-orange);
+}
+
+.seo-section tbody td {
+  color: var(--text-secondary);
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.6;
+  vertical-align: top;
+}
+
+.seo-section tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.seo-section tbody tr:hover {
+  background: var(--bg-secondary);
+}
+
+.light-page .seo-section table {
+  background: transparent;
+}
+
+.light-page .seo-section tbody tr:hover {
+  background: var(--bg-secondary);
+}
+
 /* FAQ */
 .faq-badge {
   display: inline-block;

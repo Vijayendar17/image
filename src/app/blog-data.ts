@@ -35,6 +35,15 @@ export const posts: BlogPost[] = [
     category: "Technology",
     readTime: "8 min read",
   },
+  {
+    slug: "which-ai-model-should-you-actually-use",
+    title: "Which AI Model Should You Actually Use? A 2026 Field Guide",
+    description:
+      "GPT, Claude, Gemini, Llama, Grok, DeepSeek, Qwen and Mistral — where each major model family actually stands, and which one fits your job.",
+    date: "2026-08-20",
+    category: "Technology",
+    readTime: "15 min read",
+  },
 ];
 
 export function formatDate(date: string): string {

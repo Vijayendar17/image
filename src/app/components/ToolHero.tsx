@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 interface ToolHeroProps {
-  badge: React.ReactNode;
+  badge?: React.ReactNode;
   title: string;
   desc: string;
   crumb: string;

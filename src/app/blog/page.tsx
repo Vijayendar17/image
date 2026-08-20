@@ -26,7 +26,6 @@ export default function BlogIndex() {
       <main className="tool-page light-page">
         <ToolHero
           crumb="Blog"
-          badge={<span className="badge badge-orange">📝 Blog</span>}
           title="Articles, Guides & How-Tos"
           desc="Practical tips for compressing images, sizing documents for government portals, and managing files — all free, all in your browser."
         />
